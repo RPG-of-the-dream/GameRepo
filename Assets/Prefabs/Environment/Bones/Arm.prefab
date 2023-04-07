@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7227425377821562822}
   - component: {fileID: 7227425377821562823}
+  - component: {fileID: 7545640886071073834}
   m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
@@ -84,3 +85,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &7545640886071073834
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227425377821562821}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.16603303, y: 0.26904568}
+      - {x: 0.023899138, y: 0.38898203}
+      - {x: -0.06719211, y: 0.24376538}
+      - {x: -0.12688974, y: -0.064389706}
+      - {x: -0.13123465, y: -0.31095746}
+      - {x: -0.060715377, y: -0.31257313}
+      - {x: 0.25840706, y: 0.085484296}
+      - {x: 0.3131299, y: 0.32588184}

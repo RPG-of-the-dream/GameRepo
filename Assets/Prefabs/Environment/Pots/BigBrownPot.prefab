@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8133349044722979825}
   - component: {fileID: 126188879375592265}
+  - component: {fileID: 7835149066241711202}
   m_Layer: 0
   m_Name: BottomOfPot
   m_TagString: Untagged
@@ -84,6 +85,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &7835149066241711202
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4252457890991561309}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.75, y: 1}
+  m_Direction: 0
 --- !u!1 &7150379183925504681
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,8 +171,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2057877203
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300222, guid: 9603be6d9ac69924f945566fb9497bde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

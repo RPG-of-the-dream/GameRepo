@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="71435111-5820-4a77-b23a-2097dd83af54" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../Prefabs/Enemy/Slime.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prefabs/Enemy/Slime.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Prefabs/Environment/Barrels/Barrel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prefabs/Environment/Barrels/Barrel.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Prefabs/Environment/Lights/lightA.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prefabs/Environment/Lights/lightA.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Prefabs/Environment/Lights/lightB.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prefabs/Environment/Lights/lightB.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prefabs/Player/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Direction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Horizontal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Direction.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Horizontal.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../InputReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../InputReader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Player/PlayerEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Player/PlayerEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Vertical.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Mt37argsLm6IQoK6yC5HKbtJTh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\Lenovo\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Lenovo\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\Lenovo\\AppData\\Local\\Symbols\\src"
+    ]
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="71435111-5820-4a77-b23a-2097dd83af54" name="Changes" comment="" />
+      <created>1678572891819</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678572891819</updated>
+      <workItem from="1678572899315" duration="225000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

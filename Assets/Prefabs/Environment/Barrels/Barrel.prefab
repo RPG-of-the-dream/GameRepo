@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3203631309018770746}
   - component: {fileID: 3203631309018770745}
+  - component: {fileID: 1077101557244526491}
   m_Layer: 0
   m_Name: BottomOfTheBarrel
   m_TagString: Untagged
@@ -84,6 +85,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &1077101557244526491
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3203631309018770747}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.05}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &3203631309267575945
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3203631309267575944}
+  - component: {fileID: 9147320740125053861}
   m_Layer: 0
   m_Name: BarrelSprite
   m_TagString: Untagged
@@ -117,6 +135,26 @@ Transform:
   m_Father: {fileID: 3203631309498456758}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &9147320740125053861
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3203631309267575945}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52ae46eec8e0e9445835cd778c084e37, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &3203631309498456759
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3203631309498456758}
+  - component: {fileID: 394314101767507566}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -149,6 +188,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &394314101767507566
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3203631309498456759}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.1}
+  m_Size: {x: 1, y: 1.7}
+  m_Direction: 0
 --- !u!1 &3203631309915095159
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,8 +274,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2057877203
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300168, guid: 9603be6d9ac69924f945566fb9497bde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

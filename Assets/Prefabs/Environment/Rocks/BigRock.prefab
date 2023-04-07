@@ -429,6 +429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1271505276842386769}
+  - component: {fileID: 4074797321243749806}
   m_Layer: 0
   m_Name: BigRock
   m_TagString: Untagged
@@ -457,6 +458,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &4074797321243749806
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5188565655622048621}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.7491046, y: 0.81578773}
+      - {x: -1.0650189, y: 0.6275935}
+      - {x: -1.0829298, y: -0.18445684}
+      - {x: -0.3647022, y: -0.7518163}
+      - {x: 0.35774562, y: -0.69761693}
+      - {x: 0.6437495, y: -0.6060958}
+      - {x: 0.8966694, y: -0.32853058}
+      - {x: 0.75411, y: 0.4462593}
+      - {x: 0.13186115, y: 0.81943876}
 --- !u!1 &7438975312708677177
 GameObject:
   m_ObjectHideFlags: 0
