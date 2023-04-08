@@ -45,6 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: GameScene
+    uniqueID: 2970625783
+    locked: 0
   - name: Foreground
     uniqueID: 2237090093
     locked: 0
