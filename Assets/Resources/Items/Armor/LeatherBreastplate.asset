@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LeatherBreastplate
   m_EditorClassIdentifier: 
   _itemDescriptor:
-    <ItemId>k__BackingField: 0
+    <ItemId>k__BackingField: 2
     <Type>k__BackingField: 3
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: e83f814d2a0ea554e84a3abd0433624e, type: 3}
     <ItemRarity>k__BackingField: 2

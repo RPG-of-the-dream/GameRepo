@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EpicHelmet
   m_EditorClassIdentifier: 
   _itemDescriptor:
-    <ItemId>k__BackingField: 0
+    <ItemId>k__BackingField: 1
     <Type>k__BackingField: 2
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: 77747f9fc4c45c74db3195999e929503, type: 3}
     <ItemRarity>k__BackingField: 5
