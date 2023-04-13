@@ -4,12 +4,13 @@ using StatsSystem;
 
 namespace Assets.Scripts.Items.Core
 {
-    internal class Equipment : Item
+    public abstract class Equipment : Item
     {
-        private readonly StatsController _statsController;
-        private readonly StatChangingItemDescriptor _statChangingItemDescriptor;
-        private bool _equipped;
-        public Equipment(ItemDescriptor descriptor, StatsController statsController) 
+        protected readonly StatsController _statsController;
+        protected readonly StatChangingItemDescriptor _statChangingItemDescriptor;
+        protected bool _equipped;
+
+        protected Equipment(ItemDescriptor descriptor, StatsController statsController) 
             : base(descriptor)
         {
             _statChangingItemDescriptor = descriptor as StatChangingItemDescriptor;
@@ -26,22 +27,8 @@ namespace Assets.Scripts.Items.Core
                 Equip();
         }
 
-        private void Equip()
-        {
-            _equipped = true;
-            foreach (var stat in _statChangingItemDescriptor.Stats)
-            {
-                _statsController.ProcessModificator(stat);
-            }
-        }
+        public abstract void Equip();
 
-        private void UnEquip()
-        {
-            _equipped = false;
-            foreach (var stat in _statChangingItemDescriptor.Stats)
-            {
-                _statsController.ProcessModificator(stat.GetReversedModificator());
-            }
-        }
+        public abstract void UnEquip();
     }
 }
