@@ -11856,6 +11856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerEntity: {fileID: 4546233134297996426}
   _gameUIInputView: {fileID: 1703873839}
+  _itemsStorage: {fileID: 11400000, guid: 021f4ba43d4d6eb448bffc6451911bbf, type: 2}
 --- !u!4 &1036830210
 Transform:
   m_ObjectHideFlags: 0
@@ -21173,7 +21174,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 98df7b75413f071448ccd02e016ae815, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
