@@ -5,6 +5,7 @@ using Assets.Scripts.Items;
 using Core.Services.Updater;
 using Player;
 using InputReader;
+using Items.Rarity;
 using Items.Storage;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ namespace Core
     {
         [SerializeField] private PlayerEntity _playerEntity;
         [SerializeField] private GameUIInputView _gameUIInputView;
+        [SerializeField] private ItemRarityDescriptorsStorage _rarityDescriptorsStorage;
+        [SerializeField] private LayerMask _whatIsPlayer;
         [SerializeField] private ItemsStorage _itemsStorage;
 
         private ExternalDevicesInputReader _externalDevicesInput;
@@ -43,13 +46,20 @@ namespace Core
             _disposables.Add(_playerSystem);
 
             var itemsFactory = new ItemsFactory(_playerSystem.StatsController);
-            var itemsSystem = new ItemsSystem();
+            var rarityColors = _rarityDescriptorsStorage.RarityDescriptors
+                .Cast<IItemRarityColor>()
+                .ToList();
+            var itemsSystem = new ItemsSystem(rarityColors, itemsFactory, _whatIsPlayer);
 
             var itemDescriptors = _itemsStorage.ItemScriptables
                 .Select(x => x.ItemDescriptor)
                 .ToList();
             _dropGenerator = new DropGenerator(_playerEntity, itemDescriptors, itemsSystem);
-            _dropGenerator.DropRandomItem(_dropGenerator.GetItemRarity());
+            bool isDropped;
+            do
+            {
+                isDropped = _dropGenerator.DropRandomItem(_dropGenerator.GetItemRarity());
+            } while (!isDropped);
         }
 
         private void Update()

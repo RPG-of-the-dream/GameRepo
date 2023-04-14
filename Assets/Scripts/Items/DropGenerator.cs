@@ -20,13 +20,19 @@ namespace Assets.Scripts.Items
             _itemsSystem = itemsSystem;
         }
 
-        public void DropRandomItem(ItemRarity rarity)
+        public bool DropRandomItem(ItemRarity rarity)
         {
             var items = _itemDescriptors
                 .Where(item => item.ItemRarity == rarity)
                 .ToList();
-            var itemDescriptor = items[Random.Range(0, items.Count)];
-            //_itemsSystem.DropItem(itemDescriptor, _playerEntity.transform.position + Vector3.one);
+            var numberOfPossibleItems = items.Count;
+            if (numberOfPossibleItems == 0)
+            {
+                return false;
+            }
+            var itemDescriptor = items[Random.Range(0, numberOfPossibleItems)];
+            _itemsSystem.DropItem(itemDescriptor, (Vector2)_playerEntity.transform.position + Vector2.one);
+            return true;
         }
 
         public ItemRarity GetItemRarity()
