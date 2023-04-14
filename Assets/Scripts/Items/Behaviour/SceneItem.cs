@@ -19,9 +19,15 @@ namespace Items.Behaviour
         [SerializeField] private float _dropRotation;
         [SerializeField] private float _dropRadius;
 
+        [Header("PickUpItems")]
+        [SerializeField] private Transform _itemTransform;
+
+        [field: SerializeField] public float InteractionDistance { get; private set; }
+        public Vector2 Position => _itemTransform.position;
+        
         private Sequence _sequence;
         private bool _textEnabled = true;
-
+        
         public event Action<SceneItem> ItemClicked;
 
         public bool TextEnabled
@@ -38,6 +44,11 @@ namespace Items.Behaviour
         private void Awake() => _button.onClick.AddListener(() => ItemClicked?.Invoke(this));
 
         private void OnMouseDown() => ItemClicked?.Invoke(this);
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(_itemTransform.position, InteractionDistance);
+        }
 
         public void SetItem(Sprite sprite, string itemName, Color textColor)
         {

@@ -11856,6 +11856,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerEntity: {fileID: 4546233134297996426}
   _gameUIInputView: {fileID: 1703873839}
+  _rarityDescriptorsStorage: {fileID: 11400000, guid: 5aa264b0a9d7fc44492f01591eec904b, type: 2}
+  _whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 128
   _itemsStorage: {fileID: 11400000, guid: 021f4ba43d4d6eb448bffc6451911bbf, type: 2}
 --- !u!4 &1036830210
 Transform:
@@ -53426,6 +53430,10 @@ PrefabInstance:
     - target: {fileID: 5202308265093992863, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202308265093992863, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5202308265093992863, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
       propertyPath: m_IsActive

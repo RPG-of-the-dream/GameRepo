@@ -12,10 +12,10 @@ TagManager:
   - FallingArea
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Items
+  - Player
+  - Enemy
+  - NPC
   - 
   - 
   - 
