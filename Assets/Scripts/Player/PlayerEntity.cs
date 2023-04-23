@@ -1,4 +1,3 @@
-using System;
 using Core.Animation;
 using Core.Movement.Controller;
 using StatsSystem;
