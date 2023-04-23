@@ -20,5 +20,11 @@ namespace StatsSystem
             Duration = duration;
             StartTime = startTime;
         }
+
+        public StatModificator GetReversedModificator()
+        {
+            var reverseStat = new Stat(Stat.Type, Type == StatModificatorType.Additive ? -Stat : 1 / Stat);
+            return new StatModificator(reverseStat, Type, Duration, StartTime);
+        }
     }
 }
