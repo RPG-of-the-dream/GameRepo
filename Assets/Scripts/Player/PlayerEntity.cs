@@ -1,3 +1,4 @@
+using Core.Enums;
 using Core.Animation;
 using Core.Movement.Controller;
 using StatsSystem;
@@ -9,6 +10,7 @@ namespace Player
     public class PlayerEntity : MonoBehaviour
     {
         [SerializeField] private AnimatorController _animator;
+        [SerializeField] private Direction _initialDirection;
         [SerializeField] private CapsuleCollider2D _feet;
 
         private Rigidbody2D _rigidbody;
@@ -20,6 +22,7 @@ namespace Player
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _startPosition = _rigidbody.position;
+            _animator.ChangeDirection(_initialDirection);
             _directionalMover = new DirectionalMover(_rigidbody, statValueGiver);
         }
 
