@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Items;
 using Core.Services.Updater;
-using Player;
 using InputReader;
 using Items.Rarity;
 using Items.Storage;
+using Player;
+using UI;
 using UnityEngine;
 
-namespace Core
+namespace Core.Scene
 {
     public class GameLevelInitializer : MonoBehaviour
     {
@@ -24,6 +25,7 @@ namespace Core
         private ProjectUpdater _projectUpdater;
         private DropGenerator _dropGenerator;
         private ItemsSystem _itemsSystem;
+        private UIContext _uiContext;
 
         private IList<IDisposable> _disposables;
         
@@ -44,6 +46,13 @@ namespace Core
                 _externalDevicesInput
             });
             _disposables.Add(_playerSystem);
+            
+            _uiContext = new UIContext(new List<IWindowsInputSource>()
+            {
+                _gameUIInputView,
+                _externalDevicesInput
+            });
+            _disposables.Add(_uiContext);
 
             var itemsFactory = new ItemsFactory(_playerSystem.StatsController);
             var rarityColors = _rarityDescriptorsStorage.RarityDescriptors
@@ -65,7 +74,9 @@ namespace Core
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
-                _projectUpdater.IsPaused = !_projectUpdater.IsPaused;
+            {
+                _uiContext.CloseCurrentScreen();
+            }
         }
 
         private void OnDestroy()
