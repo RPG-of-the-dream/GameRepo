@@ -1,5 +1,5 @@
-﻿using Items.Data;
-using Items.Enums;
+﻿using Assets.Scripts.Items.Enums;
+using Items.Data;
 using StatsSystem;
 
 namespace Assets.Scripts.Items.Core
@@ -18,7 +18,7 @@ namespace Assets.Scripts.Items.Core
         }
 
         public override int Amount => -1;
-        public ItemType Type { get; }
+        public EquipmentType Type { get; }
         public override void Use()
         {
             if (_equipped)
