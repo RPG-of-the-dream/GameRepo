@@ -46,19 +46,20 @@ namespace Core.Scene
                 _externalDevicesInput
             });
             _disposables.Add(_playerSystem);
-            
+
+            var data = new UIContext.Data(_playerSystem.Inventory, _rarityDescriptorsStorage.RarityDescriptors);
             _uiContext = new UIContext(new List<IWindowsInputSource>()
             {
                 _gameUIInputView,
                 _externalDevicesInput
-            });
+            }, data );
             _disposables.Add(_uiContext);
 
             var itemsFactory = new ItemsFactory(_playerSystem.StatsController);
             var rarityColors = _rarityDescriptorsStorage.RarityDescriptors
                 .Cast<IItemRarityColor>()
                 .ToList();
-            var itemsSystem = new ItemsSystem(rarityColors, itemsFactory, _whatIsPlayer);
+            var itemsSystem = new ItemsSystem(rarityColors, itemsFactory, _whatIsPlayer, _playerSystem.Inventory);
 
             var itemDescriptors = _itemsStorage.ItemScriptables
                 .Select(x => x.ItemDescriptor)

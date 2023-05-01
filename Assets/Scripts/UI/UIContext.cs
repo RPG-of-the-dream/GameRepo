@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.Items;
 using InputReader;
+using Items.Data;
 using UI.Core;
 using UI.Enums;
 using UI.InventoryUI;
@@ -16,10 +18,11 @@ namespace UI
         private readonly Dictionary<ScreenType, IScreenController> _controllers;
         private readonly Transform _uiContainer;
         private readonly List<IWindowsInputSource> _inputSources;
+        private readonly Data _data;
         
         private IScreenController _currentController;
 
-        public UIContext(List<IWindowsInputSource> inputSources)
+        public UIContext(List<IWindowsInputSource> inputSources, Data data)
         {
             _controllers = new Dictionary<ScreenType, IScreenController>();
             _inputSources = inputSources;
@@ -33,6 +36,8 @@ namespace UI
                 name = nameof(UIContext)
             };
             _uiContainer = container.transform;
+
+            _data = data;
         }
         
         public void CloseCurrentScreen()
@@ -81,7 +86,12 @@ namespace UI
         {
             return screenType switch
             {
-                ScreenType.Inventory => new InventoryScreenPresenter(GetView<InventoryScreenView>(screenType)),
+                ScreenType.Inventory => 
+                    new InventoryScreenPresenter(
+                                                    GetView<InventoryScreenView>(screenType), 
+                                                    _data.Inventory, 
+                                                    _data.RarityDescriptors
+                                                ),
                 _ => throw new NullReferenceException()
             };
         }
@@ -90,6 +100,18 @@ namespace UI
         {
             TView prefab = Resources.Load<TView>($"{LoadPath}{screenType.ToString()}");
             return Object.Instantiate(prefab, _uiContainer);
+        }
+
+        public struct Data
+        {
+            public Inventory Inventory { get; }
+            public List<RarityDescriptor> RarityDescriptors { get; }
+            
+            public Data(Inventory inventory, List<RarityDescriptor> rarityDescriptors)
+            {
+                Inventory = inventory;
+                RarityDescriptors = rarityDescriptors;
+            }
         }
     }
 }
