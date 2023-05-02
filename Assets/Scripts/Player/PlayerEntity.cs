@@ -17,9 +17,11 @@ namespace Player
         private DirectionalMover _directionalMover;
         private Vector2 _startPosition;
         private bool _fellDown;
+        private bool _inAction;
 
         public void Initialize(IStatValueGiver statValueGiver)
         {
+            _animator.Initialize();
             _rigidbody = GetComponent<Rigidbody2D>();
             _startPosition = _rigidbody.position;
             _animator.ChangeDirection(_initialDirection);
@@ -40,6 +42,14 @@ namespace Player
 
         public void Move(Vector2 direction) => _directionalMover.Move(direction);
         
+        public void StartAttack()
+        {
+            if (_inAction)
+                return;
+
+            _inAction = _animator.SetAnimationState(AnimationType.Attack, true, Attack, EndAction);
+        }
+        
         private void UpdateAnimations()
         {
             _animator.ChangeDirection(_directionalMover.Direction);
@@ -47,30 +57,13 @@ namespace Player
             if (!IsGrounded()) 
                 StartFalling();
 
-            _animator.PlayAnimation(AnimationType.Idle, true);
-            _animator.PlayAnimation(AnimationType.Walk, _directionalMover.IsMoving);
+            _animator.SetAnimationState(AnimationType.Idle, true);
+            _animator.SetAnimationState(AnimationType.Walk, _directionalMover.IsMoving);
         }
 
-        public void StartAttack()
-        {
-            if(!_animator.PlayAnimation(AnimationType.Attack, true))
-                return;
+        private void Attack() => Debug.Log("Attack");
 
-            _animator.ActionRequested += Attack;
-            _animator.AnimationEnded += EndAttack;
-        }
-
-        private void Attack()
-        {
-            Debug.Log("Attack");
-        }
-
-        private void EndAttack()
-        {
-            _animator.ActionRequested -= Attack;
-            _animator.AnimationEnded -= EndAttack;
-            _animator.PlayAnimation(AnimationType.Attack, false);
-        }
+        private void EndAction() =>  _inAction = false;
 
         private bool IsGrounded()
         {
@@ -84,26 +77,15 @@ namespace Player
                                     ).collider == null;
         }
         
-        private void StartFalling()
-        {
-            if(!_animator.PlayAnimation(AnimationType.Fall, true))
-                return;
+        private void StartFalling() => 
+            _inAction = _animator.SetAnimationState(AnimationType.Fall, true, Falling, EndFalling);
 
-            _animator.ActionRequested += Falling;
-            _animator.AnimationEnded += EndFalling;
-        }
-
-        private void Falling()
-        {
-            Debug.Log("Falling");
-        }
+        private void Falling() => Debug.Log("Falling");
 
         private void EndFalling()
         {
+            EndAction();
             _fellDown = true;
-            _animator.ActionRequested -= Falling;
-            _animator.AnimationEnded -= EndFalling;
-            _animator.PlayAnimation(AnimationType.Fall, false);
         }
 
         private void Respawn()

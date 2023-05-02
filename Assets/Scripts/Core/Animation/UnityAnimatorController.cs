@@ -8,7 +8,7 @@ namespace Core.Animation
     {
         private Animator _animator;
 
-        private void Awake() => _animator = GetComponent<Animator>();
+        public override void Initialize() => _animator = GetComponent<Animator>();
 
         protected override void PlayAnimation(AnimationType animationType)
         {
