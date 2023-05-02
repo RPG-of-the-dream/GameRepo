@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Items;
@@ -20,8 +21,8 @@ namespace UI.InventoryUI
 
         private readonly Sprite _emptyBackSprite;
 
-        public InventoryScreenPresenter(InventoryScreenView view, Inventory inventory, 
-            List<RarityDescriptor> rarityDescriptors) : base(view)
+        public InventoryScreenPresenter(InventoryScreenView view, Inventory inventory, List<RarityDescriptor> rarityDescriptors) 
+            : base(view)
         {
             _inventory = inventory;
             _rarityDescriptors = rarityDescriptors;
@@ -36,6 +37,8 @@ namespace UI.InventoryUI
         {
             InitializeBackPack();
             InitializeEquipment();
+            _inventory.BackpackChanged += UpdateBackPack;
+            _inventory.EquipmentChanged += UpdateEquipment;
             base.Initialize();
         }
 
@@ -43,6 +46,8 @@ namespace UI.InventoryUI
         {
             ClearBackPack();
             ClearEquipment();
+            _inventory.BackpackChanged -= UpdateBackPack;
+            _inventory.EquipmentChanged -= UpdateEquipment;
             base.Complete();
         }
         
@@ -64,6 +69,7 @@ namespace UI.InventoryUI
                     continue;
                 
                 slot.SetItem(item.Descriptor.ItemSprite, GetBackSprite(item.Descriptor.ItemRarity), item.Amount);
+                SubscribeToSlotEvents(slot);
             }
         }
 
@@ -93,6 +99,7 @@ namespace UI.InventoryUI
                     continue;
 
                 slot.SetItem(item.Descriptor.ItemSprite, GetBackSprite(item.Descriptor.ItemRarity), item.Amount);
+                SubscribeToSlotEvents(slot);
             }
         }
 
@@ -116,7 +123,42 @@ namespace UI.InventoryUI
             foreach (var slot in slots)
             {
                 slot.RemoveItem(_emptyBackSprite);
+                slot.SlotClicked -= UseSlot;
+                slot.SlotClearClicked -= ClearSlot;
             }
+        }
+
+        private void SubscribeToSlotEvents(ItemSlot slot)
+        {
+            slot.SlotClicked += UseSlot;
+            slot.SlotClearClicked += ClearSlot;
+        }
+
+        private void UpdateBackPack()
+        {
+            ClearBackPack();
+            InitializeBackPack();
+        }
+
+        private void UpdateEquipment()
+        {
+            ClearEquipment();
+            InitializeEquipment();
+        }
+
+        private void UseSlot(ItemSlot slot)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ClearSlot(ItemSlot slot)
+        {
+            if (_backPackSlots.TryGetValue(slot, out var item))
+                _inventory.RemoveFromBackPack(item, true);
+
+            if (slot is EquipmentSlot equipmentSlot
+                && _equipmentSlots.TryGetValue(equipmentSlot, out var equipment))
+                _inventory.UnEquip(equipment, true);
         }
     }
 }

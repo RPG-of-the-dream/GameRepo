@@ -19,6 +19,7 @@ namespace Core.Scene
         [SerializeField] private ItemRarityDescriptorsStorage _rarityDescriptorsStorage;
         [SerializeField] private LayerMask _whatIsPlayer;
         [SerializeField] private ItemsStorage _itemsStorage;
+        [SerializeField] private int _itemsQuantity;
 
         private ExternalDevicesInputReader _externalDevicesInput;
         private PlayerSystem _playerSystem;
@@ -65,11 +66,15 @@ namespace Core.Scene
                 .Select(x => x.ItemDescriptor)
                 .ToList();
             _dropGenerator = new DropGenerator(_playerEntity, itemDescriptors, itemsSystem);
-            bool isDropped;
+            var itemsQuantity = _itemsQuantity == 0 ? 1 : _itemsQuantity;
+
+            var droppedItems = 0;
             do
             {
-                isDropped = _dropGenerator.DropRandomItem(_dropGenerator.GetItemRarity());
-            } while (!isDropped);
+                var isDropped = _dropGenerator.DropRandomItem(_dropGenerator.GetItemRarity());
+                if (isDropped)
+                    droppedItems++;
+            } while (droppedItems < itemsQuantity);
         }
 
         private void Update()

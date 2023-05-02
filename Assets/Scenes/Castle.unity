@@ -12096,6 +12096,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _itemsStorage: {fileID: 11400000, guid: 021f4ba43d4d6eb448bffc6451911bbf, type: 2}
+  _itemsQuantity: 3
 --- !u!4 &1036830210
 Transform:
   m_ObjectHideFlags: 0

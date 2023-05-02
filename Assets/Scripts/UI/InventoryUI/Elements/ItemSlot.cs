@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +11,19 @@ namespace UI.InventoryUI.Elements
         [SerializeField] private Image _emptyImage;
         [SerializeField] private Image _icon;
         [SerializeField] private TMP_Text _itemAmount;
+
         [SerializeField] protected Button RemoveButton;
         [SerializeField] private Button _slotButton;
-        
+
+        public event Action<ItemSlot> SlotClicked;
+        public event Action<ItemSlot> SlotClearClicked;
+
+        private void Awake()
+        {
+            RemoveButton.onClick.AddListener(() => SlotClearClicked?.Invoke(this));
+            _slotButton.onClick.AddListener(() => SlotClicked?.Invoke(this));
+        }
+
         public void SetItem(Sprite iconSprite, Sprite itemBackSprite, int amount)
         {
             _icon.gameObject.SetActive(true);
