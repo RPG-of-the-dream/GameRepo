@@ -412,7 +412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 658, y: 25.25}
+  m_AnchoredPosition: {x: 658, y: 35.503235}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &4522439319749496836
@@ -908,6 +908,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5516995607201360650}
     m_Modifications:
+    - target: {fileID: 3800076310178184544, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4084380647595074592, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
       propertyPath: m_Name
       value: ItemSlot (1)
@@ -1012,6 +1016,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a43e68f4313c09648ac32dd52f0862c8, type: 3}
+    - target: {fileID: 7521736313740684078, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7524473267782627331, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2432,6 +2440,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5516995607201360650}
     m_Modifications:
+    - target: {fileID: 1281118995185511504, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1360795383114361918, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1360795383114361918, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066795307087134731, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692625484539960177, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4084380647595074592, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
       propertyPath: m_Name
       value: ItemSlot
@@ -2451,6 +2479,14 @@ PrefabInstance:
     - target: {fileID: 5811494512776956917, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811494512776956917, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934070116663551758, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5940748956184824240, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
       propertyPath: m_IsActive
@@ -2545,12 +2581,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b0557a2d95a2e10469099a546c8ce705, type: 3}
     - target: {fileID: 7524473267782627331, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524473267782627331, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8311200973148596161, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311200973148596161, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568517068949030099, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d9c27e39521897418cf48a73d5e517b, type: 3}

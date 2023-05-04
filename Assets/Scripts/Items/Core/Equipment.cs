@@ -30,5 +30,10 @@ namespace Assets.Scripts.Items.Core
         public abstract void Equip();
 
         public abstract void UnEquip();
+
+        public static void Remove(Equipment equipment)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

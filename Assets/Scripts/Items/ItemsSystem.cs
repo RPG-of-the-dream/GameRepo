@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Items.Core;
 using Items.Behaviour;
 using Items.Rarity;
@@ -27,6 +28,7 @@ namespace Assets.Scripts.Items
             _whatIsPlayer = whatIsPLayer;
             _itemsFactory = itemsFactory;
             _inventory = inventory;
+            _inventory.ItemDropped += DropItem;
         }
 
         public void DropItem(ItemDescriptor descriptor, Vector2 position) =>
@@ -40,7 +42,10 @@ namespace Assets.Scripts.Items
                 return;
 
             Item item = _itemsOnScene[sceneItem];
-            Debug.Log($"Adding item {item.Descriptor.ItemId} to inventory");
+            if(_inventory.BackPackItems.All(item => item is not null))
+                return;
+
+            _inventory.AddItemToBackPack(item);
             _itemsOnScene.Remove(sceneItem);
             sceneItem.ItemClicked -= TryPickSceneItem;
             Object.Destroy(sceneItem.gameObject);
