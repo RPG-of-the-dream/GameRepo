@@ -38,7 +38,6 @@ namespace UI.InventoryUI.Elements
 
         public void SetItem(Sprite iconSprite, Sprite itemBackSprite, int amount)
         {
-            //_icon.gameObject.SetActive(true);
             _itemBack.gameObject.SetActive(true);
             _icon.sprite = iconSprite;
             _emptyImage.gameObject.SetActive(false);
@@ -55,7 +54,6 @@ namespace UI.InventoryUI.Elements
         public void RemoveItem(Sprite emptyBackSprite)
         {
             _itemBack.sprite = emptyBackSprite;
-            //_icon.gameObject.SetActive(false);
             _itemBack.gameObject.SetActive(false);
             _emptyImage.gameObject.SetActive(true);
             RemoveButton.gameObject.SetActive(false);
