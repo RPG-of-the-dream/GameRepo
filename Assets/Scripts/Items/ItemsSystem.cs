@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Assets.Scripts.Items.Core;
 using Items.Behaviour;
 using Items.Rarity;
@@ -42,10 +41,10 @@ namespace Assets.Scripts.Items
                 return;
 
             Item item = _itemsOnScene[sceneItem];
-            if(_inventory.BackPackItems.All(item => item is not null))
+
+            if (!_inventory.TryAddToInventory(item))
                 return;
 
-            _inventory.AddItemToBackPack(item);
             _itemsOnScene.Remove(sceneItem);
             sceneItem.ItemClicked -= TryPickSceneItem;
             Object.Destroy(sceneItem.gameObject);

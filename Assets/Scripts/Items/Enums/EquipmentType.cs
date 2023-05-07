@@ -10,5 +10,8 @@
         OneHand = 5,
         TwoHands = 6,
         Accessory = 7,
+        Potion = 8,
+        Currency = 9,
+        Food = 10,
     }
 }

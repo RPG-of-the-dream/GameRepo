@@ -20,6 +20,8 @@ namespace UI.InventoryUI
         public  List<ItemSlot> ItemSlots { get; private set; }
         public  List<EquipmentSlot> EquipmentSlots { get; private set; }
 
+        [field: SerializeField] public Image MovingImage { get; private set; }
+
         public event Action CloseClicked;
 
         private void Awake()
@@ -29,7 +31,10 @@ namespace UI.InventoryUI
             EquipmentSlots = GetComponentsInChildren<EquipmentSlot>().ToList();
         }
 
-        private void OnDestroy() => _closeButton.onClick.RemoveAllListeners();
+        private void OnDestroy()
+        {
+            _closeButton.onClick.RemoveAllListeners();
+        } 
 
         public void SetCoinsAmount(string amount) => _coinsText.text = amount;
         
