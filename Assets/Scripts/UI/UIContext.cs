@@ -42,10 +42,6 @@ namespace UI
         
         public void CloseCurrentScreen()
         {
-            if (_currentController == null)
-            {
-                return;
-            }
             _currentController.Complete();
             _currentController = null;
         }
@@ -87,7 +83,7 @@ namespace UI
             return screenType switch
             {
                 ScreenType.Inventory => 
-                    new InventoryScreenPresenter(
+                    new InventoryScreenAdapter(
                                                     GetView<InventoryScreenView>(screenType), 
                                                     _data.Inventory, 
                                                     _data.RarityDescriptors

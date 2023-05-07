@@ -32,7 +32,7 @@ namespace Player
             _playerBrain = new PlayerBrain(playerEntity, inputSources);
             _disposables.Add(_playerBrain);
 
-            Inventory = new Inventory(null, null, _playerEntity.transform);
+            Inventory = new Inventory(null, null, _playerEntity.transform, new EquipmentConditionChecker());
         }
 
         public void Dispose()
