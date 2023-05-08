@@ -1,21 +1,23 @@
-﻿using Items.Data;
+﻿using Assets.Scripts.Items.Enums;
+using Items.Data;
 using StatsSystem;
 
 namespace Assets.Scripts.Items.Core
 {
     public class Weapon : Equipment
     {
-        public Weapon(ItemDescriptor descriptor, StatsController statsController) 
-            : base(descriptor, statsController)
+        public Weapon(ItemDescriptor descriptor, StatsController statsController, 
+            EquipmentType equipmentType) 
+            : base(descriptor, statsController, equipmentType)
         {
         }
 
-        public override void Equip()
+        protected override void Equip()
         {
             _equipped = true;
         }
 
-        public override void UnEquip()
+        protected override void UnEquip()
         {
             _equipped = false;
         }

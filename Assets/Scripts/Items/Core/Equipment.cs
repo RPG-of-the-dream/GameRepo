@@ -1,5 +1,5 @@
-﻿using Items.Data;
-using Items.Enums;
+﻿using Assets.Scripts.Items.Enums;
+using Items.Data;
 using StatsSystem;
 
 namespace Assets.Scripts.Items.Core
@@ -10,15 +10,18 @@ namespace Assets.Scripts.Items.Core
         protected readonly StatChangingItemDescriptor _statChangingItemDescriptor;
         protected bool _equipped;
 
-        protected Equipment(ItemDescriptor descriptor, StatsController statsController) 
+        public override int Quantity => -1;
+        public EquipmentType Type { get; }
+
+        protected Equipment(ItemDescriptor descriptor, StatsController statsController, 
+            EquipmentType equipmentType) 
             : base(descriptor)
         {
             _statChangingItemDescriptor = descriptor as StatChangingItemDescriptor;
             _statsController = statsController;
+            Type = equipmentType;
         }
-
-        public override int Amount => -1;
-        public ItemType Type { get; }
+        
         public override void Use()
         {
             if (_equipped)
@@ -27,8 +30,18 @@ namespace Assets.Scripts.Items.Core
                 Equip();
         }
 
-        public abstract void Equip();
+        protected virtual void Equip()
+        {
+            _equipped = true;
+            foreach (var stat in _statChangingItemDescriptor.Stats)
+                _statsController.ProcessModificator(stat);
+        }
 
-        public abstract void UnEquip();
+        protected virtual void UnEquip()
+        {
+            _equipped = false;
+            foreach (var stat in _statChangingItemDescriptor.Stats)
+                _statsController.ProcessModificator(stat.GetReversedModificator());
+        }
     }
 }
