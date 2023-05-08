@@ -1,28 +1,35 @@
 ﻿using System;
+using Assets.Scripts.Items.Enums;
 using Items.Data;
+using StatsSystem;
+using UnityEngine;
 
 namespace Assets.Scripts.Items.Core
 {
-    public abstract class Countable : Item
+    public abstract class Countable : Equipment
     {
-        private int _amount;
-        protected Countable(ItemDescriptor descriptor) 
-            : base(descriptor)
+        private int _quantity;
+        protected Countable(ItemDescriptor descriptor, StatsController statsController,
+            EquipmentType equipmentType) 
+            : base(descriptor, statsController, equipmentType)
         {
-            _amount = 1;
+            _quantity = 1;
         }
 
-        public override int Amount => _amount;
+        public override int Quantity => _quantity;
+
+        public void Stuck()
+        {
+            _quantity++;
+        }
         public override void Use()
         {
-            _amount--;
-            if (_amount <= 0)
-                Destroy();
+            
         }
 
-        private void Destroy()
+        public void Eat()
         {
-            throw new NotImplementedException();
+            _quantity--;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Core.Services.Updater;
 using Items.Data;
 using Items.Enums;
 using Player;
@@ -13,11 +14,14 @@ namespace Assets.Scripts.Items
         private readonly List<ItemDescriptor> _itemDescriptors;
         private readonly ItemsSystem _itemsSystem;
 
+        
+
         public DropGenerator(PlayerEntity playerEntity, List<ItemDescriptor> itemDescriptors, ItemsSystem itemsSystem)
         {
             _playerEntity = playerEntity;
             _itemDescriptors = itemDescriptors;
             _itemsSystem = itemsSystem;
+            ProjectUpdater.Instance.UpdateCalled += Update;
         }
 
         public bool DropRandomItem(ItemRarity rarity)
@@ -47,6 +51,12 @@ namespace Assets.Scripts.Items
                 > 97 and <= 100 => ItemRarity.Epic,
                 _ => ItemRarity.Trash,
             };
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.G))
+                DropRandomItem(GetItemRarity());
         }
     }
 }

@@ -8,5 +8,9 @@ namespace Items.Enums
         LegendaryBoots = 3,
         SteelShield = 4,
         EpicSword = 5,
+        Coin = 6,
+        Potion1 = 7,
+        Apple = 8,
+        Necklace = 9,
     }
 }

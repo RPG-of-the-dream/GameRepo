@@ -21,20 +21,20 @@ namespace Assets.Scripts.Items
             switch (descriptor.Type)
             {
                 case ItemType.Weapon:
-                    return new Weapon(descriptor, _statsController);
+                    return new Weapon(descriptor, _statsController, GetEquipmentType(descriptor));
                 case ItemType.Helmet:
                 case ItemType.Breastplate:
                 case ItemType.Boots:
                 case ItemType.Shield:
-                    return new Armor(descriptor, _statsController);
+                    return new Armor(descriptor, _statsController, GetEquipmentType(descriptor));
                 case ItemType.Potion:
-                    return new Potion(descriptor);
+                    return new Potion(descriptor, _statsController, GetEquipmentType(descriptor));
                 case ItemType.Accessory:
-                    return new Accessory(descriptor, _statsController);
+                    return new Accessory(descriptor, _statsController, GetEquipmentType(descriptor));
                 case ItemType.Food:
-                    return new Food(descriptor);
+                    return new Food(descriptor, _statsController, GetEquipmentType(descriptor));
                 case ItemType.Currency:
-                    return new Currency(descriptor);
+                    return new Currency(descriptor, _statsController, GetEquipmentType(descriptor));
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -58,16 +58,19 @@ namespace Assets.Scripts.Items
                 case ItemType.Helmet:
                     return EquipmentType.Helmet;
                 case ItemType.Breastplate:
-                    return EquipmentType.Helmet;
+                    return EquipmentType.Breastplate;
                 case ItemType.Boots:
                     return EquipmentType.Boots;
                 case ItemType.Shield:
-                    return EquipmentType.Boots;
+                    return EquipmentType.Shield;
                 case ItemType.Accessory:
                     return EquipmentType.Accessory;
                 case ItemType.Potion:
+                    return EquipmentType.Potion;
                 case ItemType.Food:
+                    return EquipmentType.Food;
                 case ItemType.Currency:
+                    return EquipmentType.Currency;
                 case ItemType.None:
                     return EquipmentType.None;
                 default:

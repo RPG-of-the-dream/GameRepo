@@ -15,8 +15,9 @@ namespace Assets.Scripts.Items
         private readonly Dictionary<SceneItem, Item> _itemsOnScene;
         private readonly LayerMask _whatIsPlayer;
         private readonly ItemsFactory _itemsFactory;
+        private readonly Inventory _inventory;
 
-        public ItemsSystem(List<IItemRarityColor> colors, ItemsFactory itemsFactory, LayerMask whatIsPLayer)
+        public ItemsSystem(List<IItemRarityColor> colors, ItemsFactory itemsFactory, LayerMask whatIsPLayer, Inventory inventory)
         {
             _sceneItem = Resources.Load<SceneItem>($"{nameof(ItemsSystem)}/{nameof(SceneItem)}");
             _itemsOnScene = new Dictionary<SceneItem, Item>();
@@ -25,6 +26,8 @@ namespace Assets.Scripts.Items
             _colors = colors;
             _whatIsPlayer = whatIsPLayer;
             _itemsFactory = itemsFactory;
+            _inventory = inventory;
+            _inventory.ItemDropped += DropItem;
         }
 
         public void DropItem(ItemDescriptor descriptor, Vector2 position) =>
@@ -38,7 +41,10 @@ namespace Assets.Scripts.Items
                 return;
 
             Item item = _itemsOnScene[sceneItem];
-            Debug.Log($"Adding item {item.Descriptor.ItemId} to inventory");
+
+            if (!_inventory.TryAddToInventory(item))
+                return;
+
             _itemsOnScene.Remove(sceneItem);
             sceneItem.ItemClicked -= TryPickSceneItem;
             Object.Destroy(sceneItem.gameObject);
