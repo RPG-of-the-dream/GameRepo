@@ -5004,7 +5004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7892833353097773653, guid: 8e8ce714ee5b5414d8a24eeaf54b17ff, type: 3}
       propertyPath: <EquipmentType>k__BackingField
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8184409273422761925, guid: 8e8ce714ee5b5414d8a24eeaf54b17ff, type: 3}
       propertyPath: m_Pivot.x
