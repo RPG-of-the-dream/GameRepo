@@ -9,9 +9,10 @@
         Shield = 4,
         OneHand = 5,
         TwoHands = 6,
-        Accessory = 7,
+        Necklace = 7,
         Potion = 8,
         Currency = 9,
         Food = 10,
+        Ring = 11,
     }
 }

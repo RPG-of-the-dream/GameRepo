@@ -45,7 +45,8 @@ namespace Assets.Scripts.Items
                 case EquipmentType.Currency:
                 case EquipmentType.Food:
                 case EquipmentType.Potion:
-                case EquipmentType.Accessory:
+                case EquipmentType.Necklace:
+                case EquipmentType.Ring:
                     return true;
                 case EquipmentType.None:
                 default:
