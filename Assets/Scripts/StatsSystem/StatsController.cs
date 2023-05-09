@@ -55,10 +55,10 @@ namespace StatsSystem
             if(_activeModificators.Count == 0)
                 return;
 
-            var expireModificator =
-                _activeModificators.Where(modificator => modificator.StartTime + modificator.Duration >= Time.time);
+            var expiredModificators =
+                _activeModificators.Where(modificator => modificator.StartTime + modificator.Duration <= Time.time);
 
-            foreach (var modificator in _activeModificators)
+            foreach (var modificator in expiredModificators)
                 ProcessModificator(modificator);
         }
     }
