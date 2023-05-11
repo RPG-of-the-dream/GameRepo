@@ -84,5 +84,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
+  _initialDirection: 4
   _feet: {fileID: 0}
-  _moveSpeed: 3

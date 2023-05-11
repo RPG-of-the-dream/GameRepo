@@ -9,42 +9,56 @@ namespace Core.Animation
         private AnimationType _currentAnimationType;
         private Direction _currentDirection;
 
-        public event Action ActionRequested;
-        public event Action AnimationEnded;
+        private Action _animationAction;
+        private Action _animationEndAction;
 
-        public bool PlayAnimation(AnimationType animationType, bool active)
+        public abstract void Initialize();
+
+        public bool SetAnimationState(AnimationType animationType, bool active, 
+            Action animationAction = null, Action endAnimationAction = null)
         {
             if (!active)
             {
                 if(_currentAnimationType == AnimationType.Idle || _currentAnimationType != animationType)
                     return false;
 
-                _currentAnimationType = AnimationType.Idle;
-                PlayAnimation(_currentAnimationType);
+                _animationAction = null;
+                _animationEndAction = null;
+                OnAnimationEnded();
                 return false;
             }
             
             if (_currentAnimationType >= animationType)
                 return false;
 
-            _currentAnimationType = animationType;
-            PlayAnimation(_currentAnimationType);
+            _animationAction = animationAction;
+            _animationEndAction = endAnimationAction;
+            SetAnimation(animationType);
             return true;
         }
 
-        public bool ChangeDirection(Direction direction)
+        public void ChangeDirection(Direction direction)
         {
             if (_currentDirection == direction || direction == Direction.None)
-                return false;
+                return;
 
             _currentDirection = direction;
             SetDirection(_currentDirection);
-            return true;
+        }
+
+        private void SetAnimation(AnimationType animationType)
+        {
+            _currentAnimationType = animationType;
+            PlayAnimation(animationType);
         }
 
         protected abstract void PlayAnimation(AnimationType animationType);
         protected abstract void SetDirection(Direction direction);
-        protected void OnActionRequested() => ActionRequested?.Invoke();
-        protected void OnAnimationEnded() => AnimationEnded?.Invoke();
+        protected void OnActionRequested() => _animationAction?.Invoke();
+        protected void OnAnimationEnded()
+        {
+            _animationEndAction?.Invoke();
+            SetAnimation(AnimationType.Idle);
+        }
     }
 }
