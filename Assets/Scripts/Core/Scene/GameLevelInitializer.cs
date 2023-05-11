@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Items;
+using Core.Enums;
 using Core.Services.Updater;
+using Drawing;
 using InputReader;
 using Items.Rarity;
 using Items.Storage;
@@ -27,6 +29,7 @@ namespace Core.Scene
         private DropGenerator _dropGenerator;
         private ItemsSystem _itemsSystem;
         private UIContext _uiContext;
+        private LevelDrawer _levelDrawer;
 
         private IList<IDisposable> _disposables;
         
@@ -75,6 +78,10 @@ namespace Core.Scene
                 if (isDropped)
                     droppedItems++;
             } while (droppedItems < itemsQuantity);
+
+            _levelDrawer = new LevelDrawer(LevelId.Level1);
+            _levelDrawer.RegisterElement(_playerEntity);
+            _disposables.Add(_levelDrawer);
         }
 
         private void Update()
