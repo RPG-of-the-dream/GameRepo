@@ -1,23 +1,31 @@
+using System;
 using Core.Enums;
 using Core.Animation;
 using Core.Movement.Controller;
+using Drawing;
 using StatsSystem;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerEntity : MonoBehaviour
+    public class PlayerEntity : MonoBehaviour, ILevelGraphicElement
     {
         [SerializeField] private AnimatorController _animator;
         [SerializeField] private Direction _initialDirection;
         [SerializeField] private CapsuleCollider2D _feet;
+        [SerializeField] private SortingGroup _sortingGroup;
 
         private Rigidbody2D _rigidbody;
         private DirectionalMover _directionalMover;
         private Vector2 _startPosition;
         private bool _fellDown;
         private bool _inAction;
+
+        public float VerticalPosition => _rigidbody.position.y;
+        
+        public event Action<ILevelGraphicElement> VerticalPositionChanged;
 
         public void Initialize(IStatValueGiver statValueGiver)
         {
@@ -40,8 +48,17 @@ namespace Player
             }
         }
 
-        public void Move(Vector2 direction) => _directionalMover.Move(direction);
-        
+        public void Move(Vector2 direction)
+        {
+            _directionalMover.Move(direction);
+            if (direction.y != 0)
+            {
+                VerticalPositionChanged?.Invoke(this);
+            }
+        }
+
+        public void SetDrawingOrder(int order) => _sortingGroup.sortingOrder = order;
+
         public void StartAttack()
         {
             if (_inAction)
