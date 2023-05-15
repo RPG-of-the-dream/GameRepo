@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerEntity : MonoBehaviour, ILevelGraphicElement
+    public class PlayerEntityBehaviour : MonoBehaviour, ILevelGraphicElement
     {
         [SerializeField] private AnimatorController _animator;
         [SerializeField] private Direction _initialDirection;

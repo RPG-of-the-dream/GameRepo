@@ -9,10 +9,10 @@ namespace Player
 {
     public class PlayerBrain : IDisposable
     {
-        private readonly PlayerEntity _playerEntity;
+        private readonly PlayerEntityBehaviour _playerEntity;
         private readonly List<IEntityInputSource> _inputSources;
 
-        public PlayerBrain(PlayerEntity playerEntity, List<IEntityInputSource> inputSources)
+        public PlayerBrain(PlayerEntityBehaviour playerEntity, List<IEntityInputSource> inputSources)
         {
             _playerEntity = playerEntity;
             _inputSources = inputSources;

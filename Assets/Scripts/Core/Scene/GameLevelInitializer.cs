@@ -16,7 +16,7 @@ namespace Core.Scene
 {
     public class GameLevelInitializer : MonoBehaviour
     {
-        [SerializeField] private PlayerEntity _playerEntity;
+        [SerializeField] private PlayerEntityBehaviour _playerEntity;
         [SerializeField] private GameUIInputView _gameUIInputView;
         [SerializeField] private ItemRarityDescriptorsStorage _rarityDescriptorsStorage;
         [SerializeField] private LayerMask _whatIsPlayer;
