@@ -6,76 +6,53 @@ using Drawing;
 using StatsSystem;
 using UnityEngine;
 using UnityEngine.Rendering;
+using NPC.Behaviour;
 
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerEntityBehaviour : MonoBehaviour, ILevelGraphicElement
-    {
-        [SerializeField] private AnimatorController _animator;
+    public class PlayerEntityBehaviour : BaseEntityBehaviour
+    {        
         [SerializeField] private Direction _initialDirection;
         [SerializeField] private CapsuleCollider2D _feet;
-        [SerializeField] private SortingGroup _sortingGroup;
 
-        private Rigidbody2D _rigidbody;
-        private DirectionalMover _directionalMover;
         private Vector2 _startPosition;
         private bool _fellDown;
-        private bool _inAction;
-
-        public float VerticalPosition => _rigidbody.position.y;
-        
-        public event Action<ILevelGraphicElement> VerticalPositionChanged;
+        private bool _inAction;             
 
         public void Initialize(IStatValueGiver statValueGiver)
         {
-            _animator.Initialize();
-            _rigidbody = GetComponent<Rigidbody2D>();
-            _startPosition = _rigidbody.position;
-            _animator.ChangeDirection(_initialDirection);
-            _directionalMover = new DirectionalMover(_rigidbody, statValueGiver);
+            base.Initialize();
+            _startPosition = Rigidbody.position;
+            Animator.ChangeDirection(_initialDirection);
+            DirectionalMover = new DirectionalMover(Rigidbody, statValueGiver);
         }
 
         private void Update()
         {
-            if (_fellDown)
-            {
-                Respawn();
-            }
-            else
-            {
-                UpdateAnimations();
-            }
+            if (_fellDown)            
+                Respawn();           
+            else           
+                UpdateAnimations();           
         }
-
-        public void Move(Vector2 direction)
-        {
-            _directionalMover.Move(direction);
-            if (direction.y != 0)
-            {
-                VerticalPositionChanged?.Invoke(this);
-            }
-        }
-
-        public void SetDrawingOrder(int order) => _sortingGroup.sortingOrder = order;
 
         public void StartAttack()
         {
             if (_inAction)
                 return;
 
-            _inAction = _animator.SetAnimationState(AnimationType.Attack, true, Attack, EndAction);
+            _inAction = Animator.SetAnimationState(AnimationType.Attack, true, Attack, EndAction);
         }
         
         private void UpdateAnimations()
         {
-            _animator.ChangeDirection(_directionalMover.Direction);
+            Animator.ChangeDirection(DirectionalMover.Direction);
             
             if (!IsGrounded()) 
                 StartFalling();
 
-            _animator.SetAnimationState(AnimationType.Idle, true);
-            _animator.SetAnimationState(AnimationType.Walk, _directionalMover.IsMoving);
+            Animator.SetAnimationState(AnimationType.Idle, true);
+            Animator.SetAnimationState(AnimationType.Walk, DirectionalMover.IsMoving);
         }
 
         private void Attack() => Debug.Log("Attack");
@@ -95,7 +72,7 @@ namespace Player
         }
         
         private void StartFalling() => 
-            _inAction = _animator.SetAnimationState(AnimationType.Fall, true, Falling, EndFalling);
+            _inAction = Animator.SetAnimationState(AnimationType.Fall, true, Falling, EndFalling);
 
         private void Falling() => Debug.Log("Falling");
 
@@ -111,5 +88,4 @@ namespace Player
             _fellDown = false;
         }
     }
-
 }
