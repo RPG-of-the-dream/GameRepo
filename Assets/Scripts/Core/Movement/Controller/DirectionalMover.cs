@@ -20,12 +20,21 @@ namespace Core.Movement.Controller
             _rigidbody = rigidbody;
             _statValueGiver = statValueGiver;
         }
-        
+
+        public DirectionalMover(Rigidbody2D rigidbody)
+        {
+            _rigidbody = rigidbody;
+        }
+
         public void Move(Vector2 direction)
         {
             _movement = direction;
             Vector2 position = _rigidbody.position;
-            position += direction.normalized * (_statValueGiver.GetStatValue(StatType.Speed) * Time.fixedDeltaTime);
+            var positionDelta = _statValueGiver is null
+                ? direction.normalized
+                : direction.normalized * (_statValueGiver.GetStatValue(StatType.Speed) * Time.fixedDeltaTime);
+
+            position += positionDelta;
             _rigidbody.MovePosition(position);
         }
         private static Direction MapDirection(Vector2 movement)
