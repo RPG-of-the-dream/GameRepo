@@ -29,7 +29,7 @@ namespace Player
             _playerEntity = playerEntity;
             _playerEntity.Initialize(StatsController);
             
-            _playerBrain = new PlayerBrain(playerEntity, inputSources);
+            _playerBrain = new PlayerBrain(playerEntity, inputSources, StatsController);
             _disposables.Add(_playerBrain);
 
             Inventory = new Inventory(null, null, _playerEntity.transform, new EquipmentConditionChecker());

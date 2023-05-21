@@ -43,16 +43,14 @@ namespace Player
 
             _inAction = Animator.SetAnimationState(AnimationType.Attack, true, Attack, EndAction);
         }
-        
-        private void UpdateAnimations()
+
+        protected override void UpdateAnimations()
         {
+            base.UpdateAnimations();
             Animator.ChangeDirection(DirectionalMover.Direction);
             
             if (!IsGrounded()) 
                 StartFalling();
-
-            Animator.SetAnimationState(AnimationType.Idle, true);
-            Animator.SetAnimationState(AnimationType.Walk, DirectionalMover.IsMoving);
         }
 
         private void Attack() => Debug.Log("Attack");

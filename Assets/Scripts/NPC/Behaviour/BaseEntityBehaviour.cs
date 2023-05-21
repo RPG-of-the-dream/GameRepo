@@ -37,8 +37,14 @@ namespace NPC.Behaviour
             {
                 VerticalPositionChanged?.Invoke(this);
             }
-        } 
+        }
 
+        protected virtual void UpdateAnimations()
+        {
+            Animator.SetAnimationState(AnimationType.Idle, true);
+            Animator.SetAnimationState(AnimationType.Walk, DirectionalMover.IsMoving);
+        }
 
+        
     }
 }

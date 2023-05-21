@@ -1,20 +1,23 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Assets.Scripts.NPC.Controller;
 using Core.Services.Updater;
 using InputReader;
+using StatsSystem;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerBrain : IDisposable
+    public class PlayerBrain : Entity, IDisposable
     {
         private readonly PlayerEntityBehaviour _playerEntity;
         private readonly List<IEntityInputSource> _inputSources;
 
-        public PlayerBrain(PlayerEntityBehaviour playerEntity, List<IEntityInputSource> inputSources)
+        public PlayerBrain(PlayerEntityBehaviour entityBehaviour, List<IEntityInputSource> inputSources, StatsController statsController) 
+            : base(entityBehaviour, statsController)
         {
-            _playerEntity = playerEntity;
+            _playerEntity = entityBehaviour;
             _inputSources = inputSources;
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
         }
