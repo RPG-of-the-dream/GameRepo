@@ -5,7 +5,7 @@ using StatsSystem;
 
 namespace Assets.Scripts.NPC.Controller
 {
-    public abstract class Entity : ILevelGraphicElement
+    public abstract class Entity : ILevelGraphicElement, IDisposable
     {
         private readonly BaseEntityBehaviour _entityBehaviour;
         protected readonly StatsController StatsController;
@@ -23,5 +23,8 @@ namespace Assets.Scripts.NPC.Controller
         }
         public void SetDrawingOrder(int order) => _entityBehaviour.SetDrawingOrder(order);
         
+        public virtual void Dispose() => StatsController.Dispose();
+        
+        protected void OnVerticalPositionChanged() => VerticalPositionChanged?.Invoke(this);
     }
 }
