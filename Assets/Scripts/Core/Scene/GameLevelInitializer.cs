@@ -80,7 +80,7 @@ namespace Core.Scene
             } while (droppedItems < itemsQuantity);
 
             _levelDrawer = new LevelDrawer(LevelId.Level1);
-            _levelDrawer.RegisterElement(_playerEntity);
+            _levelDrawer.RegisterElement(_playerSystem.PlayerBrain);
             _disposables.Add(_levelDrawer);
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using Core.Animation;
-using Core.Enums;
 using Core.Movement.Controller;
 using NPC.Behaviour;
 using UnityEngine;
@@ -27,7 +26,8 @@ namespace Assets.Scripts.NPC.Behaviour
         public override void Initialize()
         {
             base.Initialize();
-            DirectionalMover = new DirectionalMover(Rigidbody);
+            Mover = new DestinationMover(Rigidbody);
+            Animator.ChangeDirection(Mover.Direction);
         }
 
         private void Update() => UpdateAnimations();

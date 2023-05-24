@@ -5,6 +5,7 @@ using Assets.Scripts.NPC.Controller;
 using Core.Services.Updater;
 using InputReader;
 using StatsSystem;
+using StatsSystem.Enum;
 using UnityEngine;
 
 namespace Player
@@ -22,11 +23,21 @@ namespace Player
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
         }
 
-        public void Dispose() => ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
-        
+        public override void Dispose()
+        {
+            ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+            base.Dispose();
+        }
+
         private void OnFixedUpdate()
         {
-            _playerEntity.Move(GetDirection());
+            Vector2 direction = GetDirection();
+            _playerEntity.Move(direction.normalized * StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime);
+
+            if (direction.y != 0)
+            {
+                OnVerticalPositionChanged();
+            }
 
             if (IsAttack)
             {
