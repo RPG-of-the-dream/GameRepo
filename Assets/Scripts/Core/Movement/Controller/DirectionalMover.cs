@@ -1,46 +1,30 @@
 using Core.Enums;
-using StatsSystem;
-using StatsSystem.Enum;
 using UnityEngine;
 
 namespace Core.Movement.Controller
 {
-    public class DirectionalMover
+    public class DirectionalMover : Mover
     {
-        private readonly Rigidbody2D _rigidbody;
-        private readonly IStatValueGiver _statValueGiver;
+        private Vector2 _direction;
         
-        private Vector2 _movement;
-        
-        public bool IsMoving => _movement.magnitude > 0;
-        public Direction Direction => MapDirection(_movement);
-        
-        public DirectionalMover(Rigidbody2D rigidbody, IStatValueGiver statValueGiver)
+        public override bool IsMoving => _direction.magnitude > 0;
+
+        public DirectionalMover(Rigidbody2D rigidbody, Direction initialDirection) : base(rigidbody)
         {
-            _rigidbody = rigidbody;
-            _statValueGiver = statValueGiver;
+            Direction = initialDirection;
         }
 
-        public DirectionalMover(Rigidbody2D rigidbody)
+        public override void Move(Vector2 direction)
         {
-            _rigidbody = rigidbody;
+            _direction = direction;
+            Rigidbody.MovePosition(Rigidbody.position + direction);
+            Direction = MapDirection(_direction);
         }
-
-        public void Move(Vector2 direction)
-        {
-            _movement = direction;
-            Vector2 position = _rigidbody.position;
-            var positionDelta = _statValueGiver is null
-                ? direction.normalized
-                : direction.normalized * (_statValueGiver.GetStatValue(StatType.Speed) * Time.fixedDeltaTime);
-
-            position += positionDelta;
-            _rigidbody.MovePosition(position);
-        }
-        private static Direction MapDirection(Vector2 movement)
+        
+        private Direction MapDirection(Vector2 movement)
         {
             Direction direction;
-            if (Mathf.Abs(movement.y) > 0.5)
+            if (Mathf.Abs(movement.y) > 0.025)
             {
                 direction = movement.y > 0 ? Direction.Top : Direction.Down;
             }

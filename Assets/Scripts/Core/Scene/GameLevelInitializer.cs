@@ -8,6 +8,8 @@ using Drawing;
 using InputReader;
 using Items.Rarity;
 using Items.Storage;
+using NPC.Enums;
+using NPC.Spawn;
 using Player;
 using UI;
 using UnityEngine;
@@ -22,6 +24,7 @@ namespace Core.Scene
         [SerializeField] private LayerMask _whatIsPlayer;
         [SerializeField] private ItemsStorage _itemsStorage;
         [SerializeField] private int _itemsQuantity;
+        [SerializeField] private Transform _spawnPoint;
 
         private ExternalDevicesInputReader _externalDevicesInput;
         private PlayerSystem _playerSystem;
@@ -30,6 +33,7 @@ namespace Core.Scene
         private ItemsSystem _itemsSystem;
         private UIContext _uiContext;
         private LevelDrawer _levelDrawer;
+        private EntitySpawner _entitySpawner;
 
         private IList<IDisposable> _disposables;
         
@@ -80,8 +84,11 @@ namespace Core.Scene
             } while (droppedItems < itemsQuantity);
 
             _levelDrawer = new LevelDrawer(LevelId.Level1);
-            _levelDrawer.RegisterElement(_playerEntity);
+            _levelDrawer.RegisterElement(_playerSystem.PlayerBrain);
             _disposables.Add(_levelDrawer);
+
+            _entitySpawner = new EntitySpawner(_levelDrawer);
+            _disposables.Add(_entitySpawner);
         }
 
         private void Update()
@@ -89,6 +96,11 @@ namespace Core.Scene
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 _uiContext.CloseCurrentScreen();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                _entitySpawner.SpawnEntity(EntityId.Warhog, _spawnPoint.position);
             }
         }
 

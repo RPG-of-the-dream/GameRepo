@@ -1,11 +1,7 @@
-using System;
 using Core.Enums;
 using Core.Animation;
 using Core.Movement.Controller;
-using Drawing;
-using StatsSystem;
 using UnityEngine;
-using UnityEngine.Rendering;
 using NPC.Behaviour;
 
 namespace Player
@@ -20,12 +16,12 @@ namespace Player
         private bool _fellDown;
         private bool _inAction;             
 
-        public void Initialize(IStatValueGiver statValueGiver)
+        public override void Initialize()
         {
             base.Initialize();
             _startPosition = Rigidbody.position;
             Animator.ChangeDirection(_initialDirection);
-            DirectionalMover = new DirectionalMover(Rigidbody, statValueGiver);
+            Mover = new DirectionalMover(Rigidbody, _initialDirection);
         }
 
         private void Update()
@@ -47,7 +43,7 @@ namespace Player
         protected override void UpdateAnimations()
         {
             base.UpdateAnimations();
-            Animator.ChangeDirection(DirectionalMover.Direction);
+            Animator.ChangeDirection(Mover.Direction);
             
             if (!IsGrounded()) 
                 StartFalling();

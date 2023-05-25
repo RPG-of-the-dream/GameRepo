@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using Assets.Scripts.NPC.Behaviour;
 using Core.Services.Updater;
-using NPC.Behaviour;
 using Pathfinding;
 using StatsSystem;
 using StatsSystem.Enum;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Scripts.NPC.Controller
@@ -15,7 +12,7 @@ namespace Assets.Scripts.NPC.Controller
     {
         private readonly Seeker _seeker;
         private readonly MeleeEntityBehaviour _meleeEntityBehaviour;
-        private readonly Vector2 _moveDelta;
+        private readonly float _moveDelta;
 
         private bool _isAttacking;
 
@@ -35,8 +32,7 @@ namespace Assets.Scripts.NPC.Controller
             _meleeEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
             _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchCoroutine());
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdateCalled;
-            var speedDelta = StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime;
-            _moveDelta = new Vector2(speedDelta, speedDelta / 2);
+            _moveDelta = StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime;
         }
 
         private void OnFixedUpdateCalled()
@@ -52,31 +48,37 @@ namespace Assets.Scripts.NPC.Controller
             var waypointPosition = _currentPath.vectorPath[_currentWayPoint];
             var waypointDirection = waypointPosition - currentPosition;
 
+            if (Vector2.Distance(waypointPosition, currentPosition) < 0.2f)
+            {
+                _currentWayPoint++;
+                return;
+            }
+            
             if (waypointDirection.y != 0 || waypointDirection.x != 0)
             {
                 waypointDirection.y = waypointDirection.y > 0 ? 1 : -1;
-                var newVerticalPosition = currentPosition.y + _moveDelta.y * waypointDirection.y;
+                var newVerticalPosition = currentPosition.y + _moveDelta * waypointDirection.y;
                 if (waypointDirection.y > 0 && waypointPosition.y < newVerticalPosition
                     || waypointDirection.y < 0 && waypointPosition.y > newVerticalPosition)
                     newVerticalPosition = waypointPosition.y;
-
+                
+                if (waypointDirection.y != 0)
+                    OnVerticalPositionChanged();
+                
                 waypointDirection.x = waypointDirection.x > 0 ? 1 : -1;
-                var newHorizontalPosition = currentPosition.x + _moveDelta.y * waypointDirection.x;
+                var newHorizontalPosition = currentPosition.x + _moveDelta * waypointDirection.x;
                 if (waypointDirection.x > 0 && waypointPosition.x < newHorizontalPosition
                     || waypointDirection.x < 0 && waypointPosition.x > newHorizontalPosition)
                     newHorizontalPosition = waypointPosition.x;
 
                 _meleeEntityBehaviour.Move(new Vector2(newHorizontalPosition, newVerticalPosition));
             }
-
-            if (Vector2.Distance(waypointPosition, currentPosition) < 0.5f)
-                _currentWayPoint++;
         }
 
         private bool CheckIfCanAttack()
         {
             var distance = _destination - _meleeEntityBehaviour.transform.position;
-            if (Mathf.Abs(distance.x) > 0.2f || Mathf.Abs(distance.y) > 0.2f)
+            if (Mathf.Abs(distance.x) > 0.25f || Mathf.Abs(distance.y) > 0.25f)
                 return false;
 
             _meleeEntityBehaviour.Move(_destination);
@@ -84,33 +86,39 @@ namespace Assets.Scripts.NPC.Controller
             ResetMovement();
             _isAttacking = true;
             _meleeEntityBehaviour.StartAttack();
+            if (_searchCoroutine is not null)
+            {
+                ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
+            }            
+            
             return true;
         }
 
         private void ResetMovement()
         {
-            if(_searchCoroutine is not null)
-                ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
             _target = null;
             _currentPath = null;
-            var position = _meleeEntityBehaviour.transform.position;
-            _meleeEntityBehaviour.Move(position);
+            _previousTargetPosition = Vector2.negativeInfinity;
+            _meleeEntityBehaviour.Move(_meleeEntityBehaviour.transform.position);
         }
 
         private IEnumerator SearchCoroutine()
         {
             while (!_isAttacking)
             {
-                if (TryGetTarget(out _target) && _target.transform.position != _previousTargetPosition)
+                if (!TryGetTarget(out _target))
+                {
+                    ResetMovement();
+                }
+                else if(_target.transform.position != _previousTargetPosition)
                 {
                     Vector2 position = _target.transform.position;
                     _previousTargetPosition = position;
-                    _stoppingDistance = (_target.bounds.size.x + _meleeEntityBehaviour.Size.x) / 2;
+                    _stoppingDistance = (_target.bounds.size.x + _meleeEntityBehaviour.Size.x) / 1.5f;
                     var delta = position.x < _meleeEntityBehaviour.transform.position.x ? 1 : -1;
                     _destination = position + new Vector2(_stoppingDistance * delta, 0);
                     _seeker.StartPath(_meleeEntityBehaviour.transform.position, _destination, OnPathCalculated);
                 }
-
                 yield return new WaitForSeconds(0.5f);
             }
         }
