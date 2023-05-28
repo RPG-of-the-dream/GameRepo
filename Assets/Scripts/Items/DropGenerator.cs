@@ -10,13 +10,13 @@ namespace Assets.Scripts.Items
 {
     public class DropGenerator
     {
-        private readonly PlayerEntity _playerEntity;
+        private readonly PlayerEntityBehaviour _playerEntity;
         private readonly List<ItemDescriptor> _itemDescriptors;
         private readonly ItemsSystem _itemsSystem;
 
         
 
-        public DropGenerator(PlayerEntity playerEntity, List<ItemDescriptor> itemDescriptors, ItemsSystem itemsSystem)
+        public DropGenerator(PlayerEntityBehaviour playerEntity, List<ItemDescriptor> itemDescriptors, ItemsSystem itemsSystem)
         {
             _playerEntity = playerEntity;
             _itemDescriptors = itemDescriptors;
