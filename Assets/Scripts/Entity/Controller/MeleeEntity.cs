@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Battle;
 using Core.Services.Updater;
 using Entity.Behaviour;
 using Pathfinding;
@@ -30,6 +31,7 @@ namespace Entity.Controller
             _seeker = entityBehaviour.GetComponent<Seeker>();
             _meleeEntityBehaviour = entityBehaviour;
             _meleeEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
+            _meleeEntityBehaviour.Attacked += OnAttacked;
             _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchCoroutine());
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdateCalled;
             _moveDelta = StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime;
@@ -142,11 +144,16 @@ namespace Entity.Controller
 
             return target is not null;
         }
+        
+        private void OnAttacked(IDamageable target) => target.TakeDamage(StatsController.GetStatValue(StatType.Damage));
 
         private void OnAttackEnded()
         {
             _isAttacking = false;
-            _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchCoroutine());
+            ProjectUpdater.Instance.Invoke(() =>
+            {
+                _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchCoroutine());
+            }, StatsController.GetStatValue(StatType.AfterAttackDelay));
         }
     }
 }
