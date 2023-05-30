@@ -64,7 +64,16 @@ namespace Assets.Scripts.Items
                 case ItemType.Shield:
                     return EquipmentType.Shield;
                 case ItemType.Accessory:
-                    return EquipmentType.Accessory;
+                    var accessoryDescriptor = descriptor as AccessoryDescriptor;
+                    switch (accessoryDescriptor!.AccessoryType)
+                    {
+                        case AccessoryType.Necklace:
+                            return EquipmentType.Necklace;
+                        case AccessoryType.Ring:
+                            return EquipmentType.Ring;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 case ItemType.Potion:
                     return EquipmentType.Potion;
                 case ItemType.Food:
