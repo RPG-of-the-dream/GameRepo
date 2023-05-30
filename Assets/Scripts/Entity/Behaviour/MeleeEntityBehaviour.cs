@@ -1,10 +1,9 @@
 ﻿using System;
 using Core.Animation;
 using Core.Movement.Controller;
-using NPC.Behaviour;
 using UnityEngine;
 
-namespace Assets.Scripts.NPC.Behaviour
+namespace Entity.Behaviour
 {
     public class MeleeEntityBehaviour : BaseEntityBehaviour
     {

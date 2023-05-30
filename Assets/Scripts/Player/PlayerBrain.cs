@@ -1,8 +1,7 @@
-using System;
 using System.Linq;
 using System.Collections.Generic;
-using Assets.Scripts.NPC.Controller;
 using Core.Services.Updater;
+using Entity.Controller;
 using InputReader;
 using StatsSystem;
 using StatsSystem.Enum;
@@ -10,7 +9,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerBrain : Entity, IDisposable
+    public class PlayerBrain : BaseEntity
     {
         private readonly PlayerEntityBehaviour _playerEntity;
         private readonly List<IEntityInputSource> _inputSources;

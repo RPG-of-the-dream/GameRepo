@@ -3,7 +3,7 @@ using Core.Movement.Controller;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace NPC.Behaviour
+namespace Entity.Behaviour
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class BaseEntityBehaviour : MonoBehaviour

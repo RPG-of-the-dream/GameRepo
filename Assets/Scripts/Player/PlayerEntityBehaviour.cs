@@ -2,7 +2,7 @@ using Core.Enums;
 using Core.Animation;
 using Core.Movement.Controller;
 using UnityEngine;
-using NPC.Behaviour;
+using Entity.Behaviour;
 
 namespace Player
 {

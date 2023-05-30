@@ -1,21 +1,21 @@
 ﻿using System;
 using Drawing;
-using NPC.Behaviour;
+using Entity.Behaviour;
 using StatsSystem;
 
-namespace Assets.Scripts.NPC.Controller
+namespace Entity.Controller
 {
-    public abstract class Entity : ILevelGraphicElement, IDisposable
+    public abstract class BaseEntity : ILevelGraphicElement, IDisposable
     {
         private readonly BaseEntityBehaviour _entityBehaviour;
         protected readonly StatsController StatsController;
 
-        public event Action<Entity> Died;
+        public event Action<BaseEntity> Died;
 
         public float VerticalPosition => _entityBehaviour.VerticalPosition;
         public event Action<ILevelGraphicElement> VerticalPositionChanged;
 
-        protected Entity(BaseEntityBehaviour entityBehaviour, StatsController statsController)
+        protected BaseEntity(BaseEntityBehaviour entityBehaviour, StatsController statsController)
         {
             _entityBehaviour = entityBehaviour;
             _entityBehaviour.Initialize();

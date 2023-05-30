@@ -1,14 +1,14 @@
 using System;
 using System.Linq;
-using Assets.Scripts.NPC.Behaviour;
-using Assets.Scripts.NPC.Controller;
-using NPC.Data;
-using NPC.Enums;
+using Entity.Behaviour;
+using Entity.Controller;
+using Entity.Data;
+using Entity.Enums;
 using StatsSystem;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace NPC.Spawn
+namespace Entity.Spawn
 {
     public class EntitiesFactory
     {
@@ -25,7 +25,7 @@ namespace NPC.Spawn
             _entitiesContainer = gameObject.transform;
         }
 
-        public Entity GetEntityBrain(EntityId entityId, Vector2 position)
+        public BaseEntity GetEntityBrain(EntityId entityId, Vector2 position)
         {
             var data = _entitiesSpawnerDataStorage.EntitiesSpawnData.Find(element => element.Id == entityId);
             var baseEntityBehaviour = Object.Instantiate(data.EntityBehaviourPrefab, position, Quaternion.identity);

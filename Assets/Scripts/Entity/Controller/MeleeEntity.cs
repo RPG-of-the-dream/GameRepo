@@ -1,14 +1,14 @@
 ﻿using System.Collections;
-using Assets.Scripts.NPC.Behaviour;
 using Core.Services.Updater;
+using Entity.Behaviour;
 using Pathfinding;
 using StatsSystem;
 using StatsSystem.Enum;
 using UnityEngine;
 
-namespace Assets.Scripts.NPC.Controller
+namespace Entity.Controller
 {
-    public class MeleeEntity : Entity
+    public class MeleeEntity : BaseEntity
     {
         private readonly Seeker _seeker;
         private readonly MeleeEntityBehaviour _meleeEntityBehaviour;
