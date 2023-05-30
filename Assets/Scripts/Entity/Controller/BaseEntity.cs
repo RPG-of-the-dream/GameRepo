@@ -33,6 +33,7 @@ namespace Entity.Controller
         
         public virtual void Dispose() => StatsController.Dispose();
         
+        protected abstract void VisualizeHp(float currentHp);
         protected void OnVerticalPositionChanged() => VerticalPositionChanged?.Invoke(this);
 
         private void OnDamageTaken(float damage)
@@ -44,6 +45,7 @@ namespace Entity.Controller
             }
 
             _currentHp = Mathf.Clamp(_currentHp - damage, 0, _currentHp);
+            VisualizeHp(_currentHp);
             if (_currentHp <= 0)
             {
                 Died?.Invoke(this);

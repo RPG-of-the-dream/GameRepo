@@ -3,6 +3,7 @@ using Battle;
 using Core.Animation;
 using Core.Movement.Controller;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Entity.Behaviour
 {
@@ -14,6 +15,7 @@ namespace Entity.Behaviour
 
         [field: SerializeField] public  Vector2 SearchBox { get; private set; }
         [field: SerializeField] public  LayerMask Targets { get; private set; }
+        [field: SerializeField] public  Slider HpBar { get; private set; }
 
         public Vector2 Size => _collider.bounds.size;
 

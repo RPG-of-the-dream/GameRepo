@@ -32,11 +32,29 @@ namespace Entity.Controller
             _meleeEntityBehaviour = entityBehaviour;
             _meleeEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
             _meleeEntityBehaviour.Attacked += OnAttacked;
+            VisualizeHp(StatsController.GetStatValue(StatType.Health));
+            
             _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchCoroutine());
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdateCalled;
             _moveDelta = StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime;
         }
 
+        public override void Dispose()
+        {
+            ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdateCalled;
+            base.Dispose();
+        }
+
+        protected sealed override void VisualizeHp(float currentHp)
+        {
+            if (_meleeEntityBehaviour.HpBar.maxValue < currentHp)
+            {
+                _meleeEntityBehaviour.HpBar.maxValue = currentHp;
+            }
+
+            _meleeEntityBehaviour.HpBar.value = currentHp;
+        }
+        
         private void OnFixedUpdateCalled()
         {
             if (_isAttacking 

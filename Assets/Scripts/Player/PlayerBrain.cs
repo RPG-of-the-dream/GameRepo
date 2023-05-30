@@ -19,6 +19,7 @@ namespace Player
         {
             _playerEntity = entityBehaviour;
             _inputSources = inputSources;
+            VisualizeHp(StatsController.GetStatValue(StatType.Health));
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
         }
 
@@ -26,6 +27,16 @@ namespace Player
         {
             ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
             base.Dispose();
+        }
+
+        protected sealed override void VisualizeHp(float currentHp)
+        {
+            if (_playerEntity.PlayerStatsUIView.HpBar.maxValue < currentHp)
+            {
+                _playerEntity.PlayerStatsUIView.HpBar.maxValue = currentHp;
+            }
+
+            _playerEntity.PlayerStatsUIView.HpBar.value = currentHp;
         }
 
         private void OnFixedUpdate()
