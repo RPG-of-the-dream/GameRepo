@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using NPC.Behaviour;
-using NPC.Enums;
+using Entity.Behaviour;
+using Entity.Enums;
 using StatsSystem;
 using UnityEngine;
 
-namespace NPC.Data
+namespace Entity.Data
 {
     [CreateAssetMenu(fileName = nameof(EntityDataStorage), menuName = "EntitiesSpawner/EntityDataStorage")]
     public class EntityDataStorage : ScriptableObject

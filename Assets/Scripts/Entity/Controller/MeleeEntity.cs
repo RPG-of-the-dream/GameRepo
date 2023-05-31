@@ -1,14 +1,15 @@
 ﻿using System.Collections;
-using Assets.Scripts.NPC.Behaviour;
+using Battle;
 using Core.Services.Updater;
+using Entity.Behaviour;
 using Pathfinding;
 using StatsSystem;
 using StatsSystem.Enum;
 using UnityEngine;
 
-namespace Assets.Scripts.NPC.Controller
+namespace Entity.Controller
 {
-    public class MeleeEntity : Entity
+    public class MeleeEntity : BaseEntity
     {
         private readonly Seeker _seeker;
         private readonly MeleeEntityBehaviour _meleeEntityBehaviour;
@@ -30,11 +31,30 @@ namespace Assets.Scripts.NPC.Controller
             _seeker = entityBehaviour.GetComponent<Seeker>();
             _meleeEntityBehaviour = entityBehaviour;
             _meleeEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
+            _meleeEntityBehaviour.Attacked += OnAttacked;
+            VisualizeHp(StatsController.GetStatValue(StatType.Health));
+            
             _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchCoroutine());
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdateCalled;
             _moveDelta = StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime;
         }
 
+        public override void Dispose()
+        {
+            ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdateCalled;
+            base.Dispose();
+        }
+
+        protected sealed override void VisualizeHp(float currentHp)
+        {
+            if (_meleeEntityBehaviour.HpBar.maxValue < currentHp)
+            {
+                _meleeEntityBehaviour.HpBar.maxValue = currentHp;
+            }
+
+            _meleeEntityBehaviour.HpBar.value = currentHp;
+        }
+        
         private void OnFixedUpdateCalled()
         {
             if (_isAttacking 
@@ -142,11 +162,16 @@ namespace Assets.Scripts.NPC.Controller
 
             return target is not null;
         }
+        
+        private void OnAttacked(IDamageable target) => target.TakeDamage(StatsController.GetStatValue(StatType.Damage));
 
         private void OnAttackEnded()
         {
             _isAttacking = false;
-            _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchCoroutine());
+            ProjectUpdater.Instance.Invoke(() =>
+            {
+                _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchCoroutine());
+            }, StatsController.GetStatValue(StatType.AfterAttackDelay));
         }
     }
 }

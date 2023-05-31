@@ -2,7 +2,7 @@ using Core.Enums;
 using Core.Animation;
 using Core.Movement.Controller;
 using UnityEngine;
-using NPC.Behaviour;
+using Entity.Behaviour;
 
 namespace Player
 {
@@ -11,6 +11,8 @@ namespace Player
     {        
         [SerializeField] private Direction _initialDirection;
         [SerializeField] private CapsuleCollider2D _feet;
+        
+        [field: SerializeField] public PlayerStatsUIView PlayerStatsUIView { get; private set; }
 
         private Vector2 _startPosition;
         private bool _fellDown;

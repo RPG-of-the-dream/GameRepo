@@ -1,8 +1,7 @@
-using System;
 using System.Linq;
 using System.Collections.Generic;
-using Assets.Scripts.NPC.Controller;
 using Core.Services.Updater;
+using Entity.Controller;
 using InputReader;
 using StatsSystem;
 using StatsSystem.Enum;
@@ -10,7 +9,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerBrain : Entity, IDisposable
+    public class PlayerBrain : BaseEntity
     {
         private readonly PlayerEntityBehaviour _playerEntity;
         private readonly List<IEntityInputSource> _inputSources;
@@ -20,6 +19,7 @@ namespace Player
         {
             _playerEntity = entityBehaviour;
             _inputSources = inputSources;
+            VisualizeHp(StatsController.GetStatValue(StatType.Health));
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
         }
 
@@ -27,6 +27,16 @@ namespace Player
         {
             ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
             base.Dispose();
+        }
+
+        protected sealed override void VisualizeHp(float currentHp)
+        {
+            if (_playerEntity.PlayerStatsUIView.HpBar.maxValue < currentHp)
+            {
+                _playerEntity.PlayerStatsUIView.HpBar.maxValue = currentHp;
+            }
+
+            _playerEntity.PlayerStatsUIView.HpBar.value = currentHp;
         }
 
         private void OnFixedUpdate()

@@ -1,23 +1,23 @@
 using System;
 using System.Collections.Generic;
-using Assets.Scripts.NPC.Controller;
 using Drawing;
-using NPC.Data;
-using NPC.Enums;
+using Entity.Controller;
+using Entity.Data;
+using Entity.Enums;
 using UnityEngine;
 
-namespace NPC.Spawn
+namespace Entity.Spawn
 {
     public class EntitySpawner : IDisposable
     {
         private readonly LevelDrawer _levelDrawer;
-        private readonly List<Entity> _entities;
+        private readonly List<BaseEntity> _entities;
         private readonly EntitiesFactory _entitiesFactory;
 
         public EntitySpawner(LevelDrawer levelDrawer)
         {
             _levelDrawer = levelDrawer;
-            _entities = new List<Entity>();
+            _entities = new List<BaseEntity>();
             var entitiesSpawnerDataStorage = Resources.Load<EntitiesSpawnerDataStorage>($"{nameof(EntitySpawner)}/{nameof(EntitiesSpawnerDataStorage)}");
             _entitiesFactory = new EntitiesFactory(entitiesSpawnerDataStorage);
         }
@@ -37,16 +37,16 @@ namespace NPC.Spawn
             _entities.Clear();
         }
 
-        private void RemoveEntity(Entity entity)
+        private void RemoveEntity(BaseEntity baseEntity)
         {
-            _entities.Remove(entity);
-            DestroyEntity(entity);
+            _entities.Remove(baseEntity);
+            DestroyEntity(baseEntity);
         }
 
-        private void DestroyEntity(Entity entity)
+        private void DestroyEntity(BaseEntity baseEntity)
         {
-            _levelDrawer.UnregisterElement(entity);
-            entity.Died -= RemoveEntity;
+            _levelDrawer.UnregisterElement(baseEntity);
+            baseEntity.Died -= RemoveEntity;
         }
     }
 }

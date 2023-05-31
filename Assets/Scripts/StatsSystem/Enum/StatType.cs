@@ -9,5 +9,6 @@ namespace StatsSystem.Enum
         Damage = 4,
         Defence = 5,
         Speed = 6,
+        AfterAttackDelay = 7
     }
 }

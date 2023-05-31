@@ -1,4 +1,4 @@
-namespace NPC.Enums
+namespace Entity.Enums
 {
     public enum EntityId
     {

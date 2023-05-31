@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NPC.Data
+namespace Entity.Data
 {
     [CreateAssetMenu(fileName = nameof(EntitiesSpawnerDataStorage), menuName = "EntitiesSpawner/EntitySpawnerDataStorage")]
     public class EntitiesSpawnerDataStorage : ScriptableObject
