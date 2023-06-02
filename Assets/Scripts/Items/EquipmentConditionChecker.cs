@@ -16,18 +16,16 @@ namespace Assets.Scripts.Items
         public bool TryReplaceEquipment(Equipment equipment, List<Equipment> currentEquipment,
             out Equipment oldEquipment)
         {
-            oldEquipment = currentEquipment.Find(slot => slot.Type == equipment.Type);
+            oldEquipment = currentEquipment.Find(slot => slot.IsEquipmentSlotEqual(equipment));
             if (oldEquipment != null)
                 return true;
 
-            switch (equipment.Type)
+            switch (equipment.GetItemInventorySlotType())
             {
-                              
-                
                 case InventoryEquipmentSlotType.TwoHands:
                     {
-                        var oneHand = currentEquipment.Find(slot => slot.Type == InventoryEquipmentSlotType.OneHand);
-                        var shield = currentEquipment.Find(slot => slot.Type == InventoryEquipmentSlotType.Shield);
+                        var oneHand = currentEquipment.Find(slot => slot.IsEquipmentSlotEqual(InventoryEquipmentSlotType.OneHand));
+                        var shield = currentEquipment.Find(slot => slot.IsEquipmentSlotEqual(InventoryEquipmentSlotType.OneHand));
                         if (oneHand != null && shield != null)
                             return false;
 
@@ -36,7 +34,7 @@ namespace Assets.Scripts.Items
                     }
                 case InventoryEquipmentSlotType.OneHand:
                 case InventoryEquipmentSlotType.Shield:
-                    oldEquipment = currentEquipment.Find(slot => slot.Type == InventoryEquipmentSlotType.TwoHands);
+                    oldEquipment = currentEquipment.Find(slot => slot.IsEquipmentSlotEqual(InventoryEquipmentSlotType.TwoHands));
                     return true;
                 case InventoryEquipmentSlotType.Helmet:
                 case InventoryEquipmentSlotType.Breastplate:

@@ -34,14 +34,14 @@ namespace Assets.Scripts.Items
         public bool TryAddToInventory(Item item)
         {
             if (item is Equipment equipment &&
-                Equipments.All(equip => equip.Type != equipment.Type) &&
+                Equipments.All(equip => !equip.IsEquipmentSlotEqual(equipment)) &&
                 TryEquip(equipment))
                 return true;
             else
             {
                 if (item is Countable countable)
                 {
-                    var count = Equipments.Find(co => co.Type == countable.Type) as Countable;
+                    var count = Equipments.Find(co => co.IsEquipmentSlotEqual(countable)) as Countable;
                     count?.Stuck();
                 }
             }
@@ -85,7 +85,7 @@ namespace Assets.Scripts.Items
                 return false;
 
             if (item is Currency curr)
-                if (Equipments.Any(c => c.Type == curr.Type))
+                if (Equipments.Any(c => c.IsEquipmentSlotEqual(curr)))
                     return true;
 
 
