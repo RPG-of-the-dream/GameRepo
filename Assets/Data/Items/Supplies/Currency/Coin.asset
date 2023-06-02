@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Coin
   m_EditorClassIdentifier: 
   _itemDescriptor:
-    <ItemId>k__BackingField: 6
-    <Type>k__BackingField: 9
+    <ItemId>k__BackingField: 121
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: 3363be2310eac094ebbafd8c16b91189, type: 3}
     <ItemRarity>k__BackingField: 2
     <Price>k__BackingField: 0

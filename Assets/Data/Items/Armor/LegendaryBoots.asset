@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: LegendaryBoots
   m_EditorClassIdentifier: 
   _itemDescriptor:
-    <ItemId>k__BackingField: 3
-    <Type>k__BackingField: 4
+    <ItemId>k__BackingField: 81
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: b0557a2d95a2e10469099a546c8ce705, type: 3}
     <ItemRarity>k__BackingField: 4
     <Price>k__BackingField: 0

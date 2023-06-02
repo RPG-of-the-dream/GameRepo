@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Potion1
   m_EditorClassIdentifier: 
   _itemDescriptor:
-    <ItemId>k__BackingField: 7
-    <Type>k__BackingField: 6
+    <ItemId>k__BackingField: 141
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: b4905d4084a05104580d365b925b98c6, type: 3}
     <ItemRarity>k__BackingField: 3
     <Price>k__BackingField: 0
