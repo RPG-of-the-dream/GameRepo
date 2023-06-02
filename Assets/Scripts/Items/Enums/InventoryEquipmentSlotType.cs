@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Items.Enums
 {
-    public enum EquipmentType
+    public enum InventoryEquipmentSlotType
     {
         None = 0,
         Helmet = 1,

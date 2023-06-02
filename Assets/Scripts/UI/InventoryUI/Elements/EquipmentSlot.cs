@@ -5,7 +5,7 @@ namespace UI.InventoryUI.Elements
 {
     public class EquipmentSlot : ItemSlot
     {
-        [field: SerializeField] public EquipmentType EquipmentType { get; private set; }
+        [field: SerializeField] public InventoryEquipmentSlotType EquipmentType { get; private set; }
 
         public void SetAfterImage(Sprite sprite, Sprite backSprite)
         {

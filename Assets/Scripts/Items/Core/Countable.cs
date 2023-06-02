@@ -10,7 +10,7 @@ namespace Assets.Scripts.Items.Core
     {
         private int _quantity;
         protected Countable(ItemDescriptor descriptor, StatsController statsController,
-            EquipmentType equipmentType) 
+            InventoryEquipmentSlotType equipmentType) 
             : base(descriptor, statsController, equipmentType)
         {
             _quantity = 1;

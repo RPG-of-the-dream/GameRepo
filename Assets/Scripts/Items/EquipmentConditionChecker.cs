@@ -24,31 +24,31 @@ namespace Assets.Scripts.Items
             {
                               
                 
-                case EquipmentType.TwoHands:
+                case InventoryEquipmentSlotType.TwoHands:
                     {
-                        var oneHand = currentEquipment.Find(slot => slot.Type == EquipmentType.OneHand);
-                        var shield = currentEquipment.Find(slot => slot.Type == EquipmentType.Shield);
+                        var oneHand = currentEquipment.Find(slot => slot.Type == InventoryEquipmentSlotType.OneHand);
+                        var shield = currentEquipment.Find(slot => slot.Type == InventoryEquipmentSlotType.Shield);
                         if (oneHand != null && shield != null)
                             return false;
 
                         oldEquipment = oneHand ?? shield;
                         return true;
                     }
-                case EquipmentType.OneHand:
-                case EquipmentType.Shield:
-                    oldEquipment = currentEquipment.Find(slot => slot.Type == EquipmentType.TwoHands);
+                case InventoryEquipmentSlotType.OneHand:
+                case InventoryEquipmentSlotType.Shield:
+                    oldEquipment = currentEquipment.Find(slot => slot.Type == InventoryEquipmentSlotType.TwoHands);
                     return true;
-                case EquipmentType.Helmet:
-                case EquipmentType.Breastplate:
-                case EquipmentType.Boots:
+                case InventoryEquipmentSlotType.Helmet:
+                case InventoryEquipmentSlotType.Breastplate:
+                case InventoryEquipmentSlotType.Boots:
 
-                case EquipmentType.Currency:
-                case EquipmentType.Food:
-                case EquipmentType.Potion:
-                case EquipmentType.Necklace:
-                case EquipmentType.Ring:
+                case InventoryEquipmentSlotType.Currency:
+                case InventoryEquipmentSlotType.Food:
+                case InventoryEquipmentSlotType.Potion:
+                case InventoryEquipmentSlotType.Necklace:
+                case InventoryEquipmentSlotType.Ring:
                     return true;
-                case EquipmentType.None:
+                case InventoryEquipmentSlotType.None:
                 default:
                     throw new NullReferenceException($"Equipment type of item " +
                         $"{equipment.Descriptor.ItemId} is not available for equipping");
