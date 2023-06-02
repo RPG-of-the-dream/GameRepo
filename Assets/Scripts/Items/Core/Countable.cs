@@ -9,9 +9,8 @@ namespace Assets.Scripts.Items.Core
     public abstract class Countable : Equipment
     {
         private int _quantity;
-        protected Countable(ItemDescriptor descriptor, StatsController statsController,
-            InventoryEquipmentSlotType equipmentType) 
-            : base(descriptor, statsController, equipmentType)
+        protected Countable(ItemDescriptor descriptor, StatsController statsController) 
+            : base(descriptor, statsController)
         {
             _quantity = 1;
         }

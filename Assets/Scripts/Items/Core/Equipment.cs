@@ -11,15 +11,12 @@ namespace Assets.Scripts.Items.Core
         protected bool _equipped;
 
         public override int Quantity => -1;
-        public InventoryEquipmentSlotType Type { get; }
 
-        protected Equipment(ItemDescriptor descriptor, StatsController statsController, 
-            InventoryEquipmentSlotType equipmentType) 
+        protected Equipment(ItemDescriptor descriptor, StatsController statsController) 
             : base(descriptor)
         {
             _statChangingItemDescriptor = descriptor as StatChangingItemDescriptor;
             _statsController = statsController;
-            Type = equipmentType;
         }
         
         public override void Use()

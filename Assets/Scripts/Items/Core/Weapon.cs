@@ -6,9 +6,7 @@ namespace Assets.Scripts.Items.Core
 {
     public class Weapon : Equipment
     {
-        public Weapon(ItemDescriptor descriptor, StatsController statsController, 
-            InventoryEquipmentSlotType equipmentType) 
-            : base(descriptor, statsController, equipmentType)
+        public Weapon(ItemDescriptor descriptor, StatsController statsController) : base(descriptor, statsController)
         {
         }
 

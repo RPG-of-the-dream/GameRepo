@@ -7,9 +7,7 @@ namespace Assets.Scripts.Items.Core
 {
     public class Food : Countable
     {
-        public Food(ItemDescriptor descriptor, StatsController statsController,
-            InventoryEquipmentSlotType equipmentType) 
-            : base(descriptor, statsController, equipmentType)
+        public Food(ItemDescriptor descriptor, StatsController statsController) : base(descriptor, statsController)
         {
         }
     }
