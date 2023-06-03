@@ -1,6 +1,5 @@
 ﻿using System;
 using Assets.Scripts.Items.Core;
-using Assets.Scripts.Items.Enums;
 using Items.Data;
 using Items.Enums;
 using StatsSystem;

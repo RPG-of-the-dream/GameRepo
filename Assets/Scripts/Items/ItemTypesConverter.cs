@@ -75,7 +75,7 @@ namespace Assets.Scripts.Items
                 case ItemType.Accessory:
                     {
                         var accessoryType = item.Descriptor as AccessoryDescriptor;
-                        switch (accessoryType.AccessoryType)
+                        switch (accessoryType!.AccessoryType)
                         {
                             case AccessoryType.Necklace:
                                 return InventoryEquipmentSlotType.Necklace;

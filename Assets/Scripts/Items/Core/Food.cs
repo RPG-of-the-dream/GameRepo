@@ -1,6 +1,4 @@
-﻿using System;
-using Assets.Scripts.Items.Enums;
-using Items.Data;
+﻿using Items.Data;
 using StatsSystem;
 
 namespace Assets.Scripts.Items.Core

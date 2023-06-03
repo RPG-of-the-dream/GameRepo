@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Assets.Scripts.Items.Core;
 using Assets.Scripts.Items.Enums;
 
@@ -25,7 +24,7 @@ namespace Assets.Scripts.Items
                 case InventoryEquipmentSlotType.TwoHands:
                     {
                         var oneHand = currentEquipment.Find(slot => slot.IsEquipmentSlotEqual(InventoryEquipmentSlotType.OneHand));
-                        var shield = currentEquipment.Find(slot => slot.IsEquipmentSlotEqual(InventoryEquipmentSlotType.OneHand));
+                        var shield = currentEquipment.Find(slot => slot.IsEquipmentSlotEqual(InventoryEquipmentSlotType.Shield));
                         if (oneHand != null && shield != null)
                             return false;
 

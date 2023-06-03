@@ -3,7 +3,6 @@ namespace Items.Enums
     public enum ItemType
     {
         None = 0,
-        //Weapon = 1,
         OneHandedWeapon = 1,
         Helmet = 2,
         Breastplate = 3,
