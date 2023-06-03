@@ -1,17 +1,13 @@
-﻿using System;
-using Assets.Scripts.Items.Enums;
-using Items.Data;
+﻿using Items.Data;
 using StatsSystem;
-using UnityEngine;
 
 namespace Assets.Scripts.Items.Core
 {
     public abstract class Countable : Equipment
     {
         private int _quantity;
-        protected Countable(ItemDescriptor descriptor, StatsController statsController,
-            EquipmentType equipmentType) 
-            : base(descriptor, statsController, equipmentType)
+        protected Countable(ItemDescriptor descriptor, StatsController statsController) 
+            : base(descriptor, statsController)
         {
             _quantity = 1;
         }

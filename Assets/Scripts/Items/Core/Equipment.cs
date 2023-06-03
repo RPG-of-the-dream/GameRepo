@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Items.Enums;
-using Items.Data;
+﻿using Items.Data;
 using StatsSystem;
 
 namespace Assets.Scripts.Items.Core
@@ -11,15 +10,12 @@ namespace Assets.Scripts.Items.Core
         protected bool _equipped;
 
         public override int Quantity => -1;
-        public EquipmentType Type { get; }
 
-        protected Equipment(ItemDescriptor descriptor, StatsController statsController, 
-            EquipmentType equipmentType) 
+        protected Equipment(ItemDescriptor descriptor, StatsController statsController) 
             : base(descriptor)
         {
             _statChangingItemDescriptor = descriptor as StatChangingItemDescriptor;
             _statsController = statsController;
-            Type = equipmentType;
         }
         
         public override void Use()
