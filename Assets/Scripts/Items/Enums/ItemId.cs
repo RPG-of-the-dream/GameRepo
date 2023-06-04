@@ -5,6 +5,12 @@ namespace Items.Enums
         None = 0,
         #region OneHandWeapon(1 - 20)
         EpicSword = 1,
+        EpicMace = 2,
+        EpicMorgenstern = 3,
+        SteelSword = 4,
+        WoodenClub = 5,
+        WoodenStick = 6,
+        WoodenSword = 7,
         #endregion
 
         #region TwoHandsWeapon(21 - 40)
