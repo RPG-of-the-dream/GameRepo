@@ -56,14 +56,6 @@ namespace Assets.Scripts.Items.CharacterEquipment
                 slot.Renderers[0].sprite = sprites[0];
                 return;
             }
-
-            //foreach (var sprite in sprites)
-            //{
-            //    var renderers = slot.Renderers.
-            //        Where(element => element.name.Contains(sprite.name));
-            //    foreach (var renderer in renderers)
-            //        renderer.sprite = sprite;
-            //}
         }
 
         private void UnEquip(ItemType itemType)

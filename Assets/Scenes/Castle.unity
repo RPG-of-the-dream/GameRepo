@@ -20347,6 +20347,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 294927399866442280, guid: 1faca299ca729994b9b139622e8a6435, type: 3}
   m_PrefabInstance: {fileID: 1305905339}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &1315297192 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8145520162226515155, guid: 40ffdeb5cdcc9994089d34dbe373758c, type: 3}
+  m_PrefabInstance: {fileID: 3918047287410648992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1348463391 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1254613243365401927, guid: 8290a13e029ee704cbf0438db0f72bdf, type: 3}
@@ -54311,15 +54316,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 555242561859949578, guid: 40ffdeb5cdcc9994089d34dbe373758c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 555242561859949578, guid: 40ffdeb5cdcc9994089d34dbe373758c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 555242561859949578, guid: 40ffdeb5cdcc9994089d34dbe373758c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 555242561859949578, guid: 40ffdeb5cdcc9994089d34dbe373758c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -54502,6 +54507,34 @@ PrefabInstance:
       propertyPath: <PlayerStatsUIView>k__BackingField
       value: 
       objectReference: {fileID: 1887446597}
+    - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
+      propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
+      propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.data[0].<EquipmentType>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
+      propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.data[1].<EquipmentType>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
+      propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.data[0].<Renderers>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
+      propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.data[1].<Renderers>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
+      propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.data[0].<Renderers>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 1315297192}
+    - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
+      propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.data[1].<Renderers>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 946548731856767628, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
