@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3271586957335249716}
   - component: {fileID: 2927974870163814395}
   m_Layer: 0
-  m_Name: SwordmanAnimation
+  m_Name: HeroAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 1434314034315143257}
   - component: {fileID: 8471164954614306692}
   m_Layer: 0
-  m_Name: Swordman
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
