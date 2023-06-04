@@ -18,9 +18,4 @@ MonoBehaviour:
     <ItemRarity>k__BackingField: 2
     <Price>k__BackingField: 0
     <Level>k__BackingField: 0
-    <Stats>k__BackingField:
-    - <Stat>k__BackingField:
-        <Type>k__BackingField: 5
-        <Value>k__BackingField: 20222
-      <Type>k__BackingField: 0
-      <Duration>k__BackingField: 11111
+    <Stats>k__BackingField: []

@@ -8,7 +8,6 @@ using StatsSystem.Enum;
 using UnityEngine;
 using Assets.Scripts.Items.CharacterEquipment;
 using Assets.Scripts.Items;
-using System;
 
 namespace Player
 {
