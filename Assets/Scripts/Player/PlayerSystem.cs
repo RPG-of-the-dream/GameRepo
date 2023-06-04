@@ -28,11 +28,12 @@ namespace Player
             
             _playerEntity = playerEntity;
             _playerEntity.Initialize();
-            
-            PlayerBrain = new PlayerBrain(playerEntity, inputSources, StatsController);
-            _disposables.Add(PlayerBrain);
 
             Inventory = new Inventory(null, null, _playerEntity.transform, new EquipmentConditionChecker());
+            PlayerBrain = new PlayerBrain(playerEntity, inputSources, StatsController, Inventory);
+            _disposables.Add(PlayerBrain);
+
+            
         }
 
         public void Dispose()

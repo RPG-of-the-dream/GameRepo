@@ -3,16 +3,18 @@ using Core.Animation;
 using Core.Movement.Controller;
 using UnityEngine;
 using Entity.Behaviour;
+using Assets.Scripts.Items.CharacterEquipment;
 
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerEntityBehaviour : BaseEntityBehaviour
-    {        
+    {
         [SerializeField] private Direction _initialDirection;
         [SerializeField] private CapsuleCollider2D _feet;
-        
+
         [field: SerializeField] public PlayerStatsUIView PlayerStatsUIView { get; private set; }
+        [field: SerializeField] public CharacterEquipment CharacterEquipment { get; private set; }
 
         private Vector2 _startPosition;
         private bool _fellDown;
