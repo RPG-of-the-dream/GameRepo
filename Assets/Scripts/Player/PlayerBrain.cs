@@ -6,6 +6,9 @@ using InputReader;
 using StatsSystem;
 using StatsSystem.Enum;
 using UnityEngine;
+using Assets.Scripts.Items.CharacterEquipment;
+using Assets.Scripts.Items;
+using System;
 
 namespace Player
 {
@@ -14,13 +17,26 @@ namespace Player
         private readonly PlayerEntityBehaviour _playerEntity;
         private readonly List<IEntityInputSource> _inputSources;
 
-        public PlayerBrain(PlayerEntityBehaviour entityBehaviour, List<IEntityInputSource> inputSources, StatsController statsController) 
+        private readonly EquipmentSetter _equipmentSetter;
+        private readonly Inventory _inventory;
+
+        public PlayerBrain(PlayerEntityBehaviour entityBehaviour, List<IEntityInputSource> inputSources, 
+            StatsController statsController, Inventory inventory) 
             : base(entityBehaviour, statsController)
         {
             _playerEntity = entityBehaviour;
             _inputSources = inputSources;
             VisualizeHp(StatsController.GetStatValue(StatType.Health));
+            _equipmentSetter = new EquipmentSetter(_playerEntity.CharacterEquipment);
+
+            _inventory = inventory;
+            _inventory.EquipmentChanged += OnEquipmentChanged;
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
+        }
+
+        private void OnEquipmentChanged()
+        {
+            _equipmentSetter.UpdateEquipment(_inventory.Equipments.Select(element => element.Descriptor.ItemId).ToList());
         }
 
         public override void Dispose()

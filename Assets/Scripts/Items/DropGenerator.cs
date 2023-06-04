@@ -56,7 +56,12 @@ namespace Assets.Scripts.Items
         private void Update()
         {
             if (Input.GetKeyUp(KeyCode.G))
-                DropRandomItem(GetItemRarity());
+            {
+                DropRandomItem(ItemRarity.Epic);
+                DropRandomItem(ItemRarity.Common);
+            }
+                
+                //DropRandomItem(GetItemRarity());
         }
     }
 }
