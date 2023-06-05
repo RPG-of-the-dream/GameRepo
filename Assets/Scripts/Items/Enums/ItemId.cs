@@ -47,5 +47,10 @@ namespace Items.Enums
         #region Accessories(181 - 200)
         Necklace = 181,
         #endregion
+        
+        #region Bows(201 - 220)
+        Bow = 201,
+        RecurveBow = 202,
+        #endregion
     }
 }
