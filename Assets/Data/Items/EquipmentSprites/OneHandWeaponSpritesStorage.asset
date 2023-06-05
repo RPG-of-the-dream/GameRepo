@@ -16,4 +16,22 @@ MonoBehaviour:
   <EquipmentSprites>k__BackingField:
   - <ItemId>k__BackingField: 1
     <Sprites>k__BackingField:
-    - {fileID: 21300000, guid: e1e2b2fb515081e499f181244e551cf6, type: 3}
+    - {fileID: 21300000, guid: 0b6eec69baee123418a25cbd384970d0, type: 3}
+  - <ItemId>k__BackingField: 2
+    <Sprites>k__BackingField:
+    - {fileID: 21300000, guid: e3538f7dbdff687469cd4890f0113c31, type: 3}
+  - <ItemId>k__BackingField: 3
+    <Sprites>k__BackingField:
+    - {fileID: 21300000, guid: b794d433fefd4094e96448c7165317b3, type: 3}
+  - <ItemId>k__BackingField: 4
+    <Sprites>k__BackingField:
+    - {fileID: 21300000, guid: 2b69d883c71cd6d42acf10e56cf35919, type: 3}
+  - <ItemId>k__BackingField: 5
+    <Sprites>k__BackingField:
+    - {fileID: 21300000, guid: 23cfef3c39247854597a193ffcdb7782, type: 3}
+  - <ItemId>k__BackingField: 6
+    <Sprites>k__BackingField:
+    - {fileID: 21300000, guid: 0f89c303486d56c489650165e0b10538, type: 3}
+  - <ItemId>k__BackingField: 7
+    <Sprites>k__BackingField:
+    - {fileID: 21300000, guid: ee29e7f7fe9677e4c885f98f2cb42686, type: 3}

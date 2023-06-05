@@ -1,3 +1,4 @@
+using System;
 using Core.Enums;
 using Core.Animation;
 using Core.Movement.Controller;
@@ -18,7 +19,9 @@ namespace Player
 
         private Vector2 _startPosition;
         private bool _fellDown;
-        private bool _inAction;             
+
+        public event Action AttackRequested; 
+        public event Action AttackEnded;
 
         public override void Initialize()
         {
@@ -36,13 +39,11 @@ namespace Player
                 UpdateAnimations();           
         }
 
-        public void StartAttack()
-        {
-            if (_inAction)
-                return;
+        public void SetAnimationParameter(string parameter, int value) =>
+            Animator.SetAnimationParameter(parameter, value);
 
-            _inAction = Animator.SetAnimationState(AnimationType.Attack, true, Attack, EndAction);
-        }
+        public void StartAttack() => 
+            Animator.SetAnimationState(AnimationType.Attack, true, OnAttack, OnAttackEnded);
 
         protected override void UpdateAnimations()
         {
@@ -53,9 +54,8 @@ namespace Player
                 StartFalling();
         }
 
-        private void Attack() => Debug.Log("Attack");
-
-        private void EndAction() =>  _inAction = false;
+        private void OnAttack() => AttackRequested?.Invoke();
+        private void OnAttackEnded() => AttackEnded?.Invoke();
 
         private bool IsGrounded()
         {
@@ -70,15 +70,11 @@ namespace Player
         }
         
         private void StartFalling() => 
-            _inAction = Animator.SetAnimationState(AnimationType.Fall, true, Falling, EndFalling);
+            Animator.SetAnimationState(AnimationType.Fall, true, Falling, EndFalling);
 
         private void Falling() => Debug.Log("Falling");
 
-        private void EndFalling()
-        {
-            EndAction();
-            _fellDown = true;
-        }
+        private void EndFalling() => _fellDown = true;
 
         private void Respawn()
         {

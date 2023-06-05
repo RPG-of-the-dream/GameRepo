@@ -54340,7 +54340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1113986653707802697, guid: 40ffdeb5cdcc9994089d34dbe373758c, type: 3}
       propertyPath: m_Name
-      value: SwordmanAnimation
+      value: HeroAnimation
       objectReference: {fileID: 0}
     - target: {fileID: 1113986653707802697, guid: 40ffdeb5cdcc9994089d34dbe373758c, type: 3}
       propertyPath: m_IsActive
@@ -54513,7 +54513,7 @@ PrefabInstance:
       objectReference: {fileID: 1887446597}
     - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
       propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
       propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.data[0].<EquipmentType>k__BackingField
@@ -54521,7 +54521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
       propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.data[1].<EquipmentType>k__BackingField
-      value: 3
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
       propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.data[0].<Renderers>k__BackingField.Array.size
@@ -54538,7 +54538,7 @@ PrefabInstance:
     - target: {fileID: 8669252427474070685, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
       propertyPath: <CharacterEquipment>k__BackingField.<EquipmentSlots>k__BackingField.Array.data[1].<Renderers>k__BackingField.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1315297192}
     m_RemovedComponents:
     - {fileID: 946548731856767628, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c4e08853a77c9b64c93e3517d00033db, type: 3}

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _equipmentStorages:
   - {fileID: 11400000, guid: 86a2fc7b3e1e93c40a9d96daed26981d, type: 2}
+  - {fileID: 11400000, guid: 178c15413b0d1c5408308e2003201889, type: 2}
