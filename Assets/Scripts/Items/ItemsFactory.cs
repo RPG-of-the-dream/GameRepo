@@ -20,7 +20,8 @@ namespace Assets.Scripts.Items
             switch (descriptor.ItemId.GetItemType())
             {
                 case ItemType.OneHandedWeapon:
-                case ItemType.TwoHandedWeapon:
+                case ItemType.TwoHandedWeapon: 
+                case ItemType.Bow:
                     return new Weapon(descriptor, _statsController);
                 case ItemType.Helmet:
                 case ItemType.Breastplate:

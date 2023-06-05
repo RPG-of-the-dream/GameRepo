@@ -18,6 +18,7 @@ namespace Assets.Scripts.Items
         private const int MaxPotionIndex = 160;
         private const int MaxFoodIndex = 180;
         private const int MaxAccessoryIndex = 200;
+        private const int MaxBowIndex = 220;
 
         public static ItemType GetItemType(this Item item) => item.Descriptor.ItemId.GetItemType();
 
@@ -35,6 +36,7 @@ namespace Assets.Scripts.Items
                 <= MaxPotionIndex => ItemType.Potion,
                 <= MaxFoodIndex => ItemType.Food,
                 <= MaxAccessoryIndex => ItemType.Accessory,
+                <= MaxBowIndex => ItemType.Bow,
                 _ => ItemType.None
             };
         }
@@ -52,7 +54,7 @@ namespace Assets.Scripts.Items
             => itemId.GetItemType().IsWeapon();
 
         public static bool IsWeapon(this ItemType itemType)
-            => itemType == ItemType.OneHandedWeapon || itemType == ItemType.TwoHandedWeapon;
+            => itemType == ItemType.OneHandedWeapon || itemType == ItemType.TwoHandedWeapon || itemType == ItemType.Bow;
 
         public static InventoryEquipmentSlotType GetItemInventorySlotType(this Item item)
         {
@@ -61,6 +63,7 @@ namespace Assets.Scripts.Items
                 case ItemType.OneHandedWeapon:
                     return InventoryEquipmentSlotType.OneHand;
                 case ItemType.TwoHandedWeapon:
+                case ItemType.Bow:
                     return InventoryEquipmentSlotType.TwoHands;
                 case ItemType.Helmet:
                     return InventoryEquipmentSlotType.Helmet;

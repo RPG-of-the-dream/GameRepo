@@ -13,5 +13,6 @@ namespace Items.Enums
         Food = 8,
         Currency = 9,
         TwoHandedWeapon = 10,
+        Bow = 11
     }
 }
