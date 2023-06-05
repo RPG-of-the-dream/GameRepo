@@ -13,17 +13,25 @@ namespace Player
 {
     public class PlayerBrain : BaseEntity
     {
+        private const string WeaponType = "WeaponType";
+        
         private readonly PlayerEntityBehaviour _playerEntity;
         private readonly List<IEntityInputSource> _inputSources;
 
         private readonly EquipmentSetter _equipmentSetter;
         private readonly Inventory _inventory;
 
+        private bool _isAttacking;
+        private bool _canAttack;
+
         public PlayerBrain(PlayerEntityBehaviour entityBehaviour, List<IEntityInputSource> inputSources, 
             StatsController statsController, Inventory inventory) 
             : base(entityBehaviour, statsController)
         {
             _playerEntity = entityBehaviour;
+            _playerEntity.AttackEnded += OnAttackEnded;
+            _playerEntity.AttackRequested += OnAttackRequested;
+            
             _inputSources = inputSources;
             VisualizeHp(StatsController.GetStatValue(StatType.Health));
             _equipmentSetter = new EquipmentSetter(_playerEntity.CharacterEquipment);
@@ -31,11 +39,6 @@ namespace Player
             _inventory = inventory;
             _inventory.EquipmentChanged += OnEquipmentChanged;
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
-        }
-
-        private void OnEquipmentChanged()
-        {
-            _equipmentSetter.UpdateEquipment(_inventory.Equipments.Select(element => element.Descriptor.ItemId).ToList());
         }
 
         public override void Dispose()
@@ -53,9 +56,41 @@ namespace Player
 
             _playerEntity.PlayerStatsUIView.HpBar.value = currentHp;
         }
+        
 
+        private void OnAttackRequested() => Debug.Log("Attacking");
+
+        private void OnAttackEnded()
+        {
+            _isAttacking = false;
+            ProjectUpdater.Instance.Invoke(() => _canAttack = true,
+                StatsController.GetStatValue(StatType.AfterAttackDelay));
+        }
+        
+        private void OnEquipmentChanged()
+        {
+            _equipmentSetter.UpdateEquipment(
+                _inventory.Equipments.Select(element => element.Descriptor.ItemId).ToList());
+
+            var weapon = _inventory.Equipments.Find(element => element.IsWeapon());
+
+            if (weapon is null)
+            {
+                _canAttack = false;
+                return; 
+            }
+
+            _canAttack = true;
+            _playerEntity.SetAnimationParameter(WeaponType, (int)weapon.GetItemType());
+        }
+        
         private void OnFixedUpdate()
         {
+            if (_isAttacking)
+            {
+                return;
+            }
+            
             Vector2 direction = GetDirection();
             _playerEntity.Move(direction.normalized * StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime);
 
@@ -64,9 +99,11 @@ namespace Player
                 OnVerticalPositionChanged();
             }
 
-            if (IsAttack)
+            if (IsAttack && _canAttack)
             {
                 _playerEntity.StartAttack();
+                _isAttacking = true;
+                _canAttack = false;
             }
 
             foreach (var inputSource in _inputSources)

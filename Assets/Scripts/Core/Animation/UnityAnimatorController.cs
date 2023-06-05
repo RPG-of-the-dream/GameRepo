@@ -10,10 +10,11 @@ namespace Core.Animation
 
         public override void Initialize() => _animator = GetComponent<Animator>();
 
-        protected override void PlayAnimation(AnimationType animationType)
-        {
+        public override void SetAnimationParameter(string parameter, int value) =>
+            _animator.SetInteger(parameter, value);
+
+        protected override void PlayAnimation(AnimationType animationType) =>
             _animator.SetInteger(nameof(AnimationType), (int)animationType);
-        }
 
         protected override void SetDirection(Direction direction)
         {

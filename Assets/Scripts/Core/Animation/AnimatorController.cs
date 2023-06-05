@@ -13,6 +13,8 @@ namespace Core.Animation
         private Action _animationEndAction;
 
         public abstract void Initialize();
+        
+        public abstract void SetAnimationParameter(string parameter, int value);
 
         public bool SetAnimationState(AnimationType animationType, bool active, 
             Action animationAction = null, Action endAnimationAction = null)
