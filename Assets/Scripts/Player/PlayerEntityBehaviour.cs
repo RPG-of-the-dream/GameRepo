@@ -5,6 +5,7 @@ using Core.Movement.Controller;
 using UnityEngine;
 using Entity.Behaviour;
 using Assets.Scripts.Items.CharacterEquipment;
+using Battle;
 
 namespace Player
 {
@@ -16,6 +17,8 @@ namespace Player
 
         [field: SerializeField] public PlayerStatsUIView PlayerStatsUIView { get; private set; }
         [field: SerializeField] public CharacterEquipment CharacterEquipment { get; private set; }
+        [field: SerializeField] public SpriteRenderer Arrow { get; private set; }
+        [field: SerializeField] public Attacker Attacker { get; private set; }
 
         private Vector2 _startPosition;
         private bool _fellDown;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Items;
+using Battle.Projectile;
 using Core.Enums;
 using Core.Services.Updater;
 using Drawing;
@@ -34,6 +35,7 @@ namespace Core.Scene
         private UIContext _uiContext;
         private LevelDrawer _levelDrawer;
         private EntitySpawner _entitySpawner;
+        private ProjectileFactory _projectileFactory;
 
         private IList<IDisposable> _disposables;
         
@@ -46,13 +48,26 @@ namespace Core.Scene
                 _projectUpdater = new GameObject().AddComponent<ProjectUpdater>();
             else
                 _projectUpdater = ProjectUpdater.Instance as ProjectUpdater;
-            
+
+            _levelDrawer = new LevelDrawer(LevelId.Level1);
+            _projectileFactory = new ProjectileFactory(_levelDrawer);
+
             _externalDevicesInput = new ExternalDevicesInputReader();
-            _playerSystem = new PlayerSystem(_playerEntity, new List<IEntityInputSource>()
-            {
-                _gameUIInputView,
-                _externalDevicesInput
-            });
+
+            var weaponsFactory = new WeaponsFactory(
+                _playerEntity.Arrow,
+                _playerEntity.transform,
+                _playerEntity.Attacker, 
+                _projectileFactory);
+
+            _playerSystem = new PlayerSystem(
+                _playerEntity, 
+                new List<IEntityInputSource>()
+                {
+                    _gameUIInputView,
+                    _externalDevicesInput
+                },
+                weaponsFactory);
             _disposables.Add(_playerSystem);
 
             var data = new UIContext.Data(_playerSystem.Inventory, _rarityDescriptorsStorage.RarityDescriptors);
