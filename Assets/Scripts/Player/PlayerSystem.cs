@@ -17,7 +17,10 @@ namespace Player
         public StatsController StatsController { get; }
         public Inventory Inventory { get; }
         
-        public PlayerSystem(PlayerEntityBehaviour playerEntity, List<IEntityInputSource> inputSources)
+        public PlayerSystem(
+            PlayerEntityBehaviour playerEntity, 
+            List<IEntityInputSource> inputSources, 
+            WeaponsFactory weaponsFactory)
         {
             _disposables = new List<IDisposable>();
             
@@ -30,10 +33,8 @@ namespace Player
             _playerEntity.Initialize();
 
             Inventory = new Inventory(null, null, _playerEntity.transform, new EquipmentConditionChecker());
-            PlayerBrain = new PlayerBrain(playerEntity, inputSources, StatsController, Inventory);
+            PlayerBrain = new PlayerBrain(playerEntity, inputSources, StatsController, Inventory, weaponsFactory);
             _disposables.Add(PlayerBrain);
-
-            
         }
 
         public void Dispose()

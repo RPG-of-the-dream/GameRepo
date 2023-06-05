@@ -8,6 +8,7 @@ using StatsSystem.Enum;
 using UnityEngine;
 using Assets.Scripts.Items.CharacterEquipment;
 using Assets.Scripts.Items;
+using Battle.Weapon;
 
 namespace Player
 {
@@ -23,9 +24,15 @@ namespace Player
 
         private bool _isAttacking;
         private bool _canAttack;
+        private WeaponBase _currentWeapon;
+        private WeaponsFactory _weaponsFactory;
 
-        public PlayerBrain(PlayerEntityBehaviour entityBehaviour, List<IEntityInputSource> inputSources, 
-            StatsController statsController, Inventory inventory) 
+        public PlayerBrain(
+            PlayerEntityBehaviour entityBehaviour, 
+            List<IEntityInputSource> inputSources, 
+            StatsController statsController, 
+            Inventory inventory,
+            WeaponsFactory weaponsFactory) 
             : base(entityBehaviour, statsController)
         {
             _playerEntity = entityBehaviour;
@@ -38,6 +45,8 @@ namespace Player
 
             _inventory = inventory;
             _inventory.EquipmentChanged += OnEquipmentChanged;
+
+            _weaponsFactory = weaponsFactory;
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
         }
 
@@ -56,13 +65,14 @@ namespace Player
 
             _playerEntity.PlayerStatsUIView.HpBar.value = currentHp;
         }
-        
 
-        private void OnAttackRequested() => Debug.Log("Attacking");
+
+        private void OnAttackRequested() => _currentWeapon?.Attack(StatsController.GetStatValue(StatType.Damage));
 
         private void OnAttackEnded()
         {
             _isAttacking = false;
+            _currentWeapon?.EndAttack();
             ProjectUpdater.Instance.Invoke(() => _canAttack = true,
                 StatsController.GetStatValue(StatType.AfterAttackDelay));
         }
@@ -79,6 +89,8 @@ namespace Player
                 _canAttack = false;
                 return; 
             }
+
+            _currentWeapon = _weaponsFactory.GetWeapon(weapon.Descriptor.ItemId);
 
             _canAttack = true;
             _playerEntity.SetAnimationParameter(WeaponType, (int)weapon.GetItemType());
