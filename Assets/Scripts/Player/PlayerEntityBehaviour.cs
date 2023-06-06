@@ -23,6 +23,8 @@ namespace Player
         private Vector2 _startPosition;
         private bool _fellDown;
 
+        public Direction CurrentDirection => Mover.Direction;
+
         public event Action AttackRequested; 
         public event Action AttackEnded;
 

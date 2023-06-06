@@ -18,7 +18,8 @@ namespace Core.Movement.Controller
         {
             _direction = direction;
             Rigidbody.MovePosition(Rigidbody.position + direction);
-            Direction = MapDirection(_direction);
+            var newDirection = MapDirection(_direction);
+            Direction = newDirection == Direction.None ? Direction : newDirection;
         }
         
         private Direction MapDirection(Vector2 movement)

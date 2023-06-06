@@ -8,20 +8,15 @@ namespace Battle.Projectile.Behaviour
         [SerializeField] private Direction _direction;
         [SerializeField] private float _verticalAttackRadius;
 
-        protected override void Move(Vector2 targetInfo, float speed)
+        private float _lastVerticalPosition;
+        
+        private void FixedUpdate()
         {
-            SetDirection(targetInfo);
-            RigidBody.velocity = targetInfo * speed;
-        }
-
-        private void SetDirection(Vector2 targetDirection)
-        {
-            var direction = targetDirection.x > 0 ? Direction.Right : Direction.Left;
-            if(direction == _direction)
+            if (!gameObject.activeSelf || _lastVerticalPosition == VerticalPosition)
                 return;
-
-            transform.Rotate(0, 180, 0);
-            _direction = direction;
+            
+            OnVerticalPositionChanged();
+            _lastVerticalPosition = VerticalPosition;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -32,6 +27,48 @@ namespace Battle.Projectile.Behaviour
 
             target.TakeDamage(Damage);
             OnAttacked();
+        }
+
+        protected override void Move(Vector2 targetInfo, float speed)
+        {
+            SetDirection(targetInfo);
+            RigidBody.velocity = targetInfo * speed;
+            _lastVerticalPosition = VerticalPosition;
+        }
+
+        private void SetDirection(Vector2 targetDirection)
+        {
+            var direction = MapDirection(targetDirection); 
+            
+            if(direction == _direction)
+                return;
+            
+            transform.Rotate(0, 0, -MapAngle(_direction));
+            transform.Rotate(0, 0, MapAngle(direction));
+            _direction = direction;
+        }
+
+        private static Direction MapDirection(Vector2 direction)
+        {
+            if (Mathf.Abs(direction.y) > 0)
+            {
+                return direction.y > 0 ? Direction.Top : Direction.Down;
+            }
+            else
+            {
+                return direction.x > 0 ? Direction.Right : Direction.Left;
+            }
+        }
+        
+        private static float MapAngle(Direction direction)
+        {
+            return direction switch
+            {
+                Direction.Right => 0,
+                Direction.Left => 180,
+                Direction.Down => 270,
+                _ => 90
+            };
         }
     }
 }

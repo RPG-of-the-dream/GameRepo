@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using Core.Enums;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Battle.Weapon
@@ -17,7 +18,7 @@ namespace Battle.Weapon
             _attacker.AddComponent<PolygonCollider2D>().isTrigger = true;
         }
 
-        public override void Attack(float damage)
+        public override void Attack(float damage, Direction projectileDirection)
         {
             _attacker.Reset();
             _attacker.gameObject.SetActive(true);
