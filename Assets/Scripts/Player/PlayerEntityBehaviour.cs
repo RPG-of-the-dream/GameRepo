@@ -75,7 +75,7 @@ namespace Player
         }
         
         private void StartFalling() => 
-            Animator.SetAnimationState(AnimationType.Fall, true, Falling, EndFalling);
+            Animator.SetAnimationState(AnimationType.Death, true, Falling, EndFalling);
 
         private void Falling() => Debug.Log("Falling");
 
