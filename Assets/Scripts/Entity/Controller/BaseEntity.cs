@@ -14,9 +14,9 @@ namespace Entity.Controller
 
         private float _currentHp;
         
-        public event Action<BaseEntity> Died;
-
         public float VerticalPosition => _entityBehaviour.VerticalPosition;
+        
+        public event Action<BaseEntity> Died;
         public event Action<ILevelGraphicElement> VerticalPositionChanged;
 
         protected BaseEntity(BaseEntityBehaviour entityBehaviour, StatsController statsController)
@@ -31,8 +31,12 @@ namespace Entity.Controller
 
         public void SetDrawingOrder(int order) => _entityBehaviour.SetDrawingOrder(order);
         
-        public virtual void Dispose() => StatsController.Dispose();
-        
+        public virtual void Dispose()
+        {
+            _entityBehaviour.PlayDeath();
+            StatsController.Dispose();
+        }
+
         protected abstract void VisualizeHp(float currentHp);
         protected void OnVerticalPositionChanged() => VerticalPositionChanged?.Invoke(this);
 

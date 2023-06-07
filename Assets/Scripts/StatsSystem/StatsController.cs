@@ -29,14 +29,16 @@ namespace StatsSystem
             if(statToChange == null)
                 return;
 
-            var addedValue = modificator.Type == StatModificatorType.Additive
+            var newValue = modificator.Type == StatModificatorType.Additive
                 ? statToChange + modificator.Stat
                 : statToChange * modificator.Stat;
-            
+
+            var addedValue = newValue - statToChange;
             statToChange.SetStatValue(statToChange + addedValue);
             
-            if(modificator.Duration<0)
+            if(modificator.Duration <= 0)
                 return;
+            
             if (_activeModificators.Contains(modificator))
                 _activeModificators.Remove(modificator);
             else

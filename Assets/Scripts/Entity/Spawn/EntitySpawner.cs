@@ -47,6 +47,7 @@ namespace Entity.Spawn
         {
             _levelDrawer.UnregisterElement(baseEntity);
             baseEntity.Died -= RemoveEntity;
+            baseEntity.Dispose();
         }
     }
 }

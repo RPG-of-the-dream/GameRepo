@@ -12,6 +12,7 @@ namespace Entity.Behaviour
         [SerializeField] private Collider2D _collider;
         [SerializeField] private Transform _attackPoint;
         [SerializeField] private float _attackRadius;
+        [SerializeField] private BoxCollider2D _feet;
 
         [field: SerializeField] public  Vector2 SearchBox { get; private set; }
         [field: SerializeField] public  LayerMask Targets { get; private set; }
@@ -21,6 +22,7 @@ namespace Entity.Behaviour
 
         public event Action<IDamageable> Attacked; 
         public event Action AttackSequenceEnded;
+        public event Action Fell;
 
         private void OnDrawGizmos()
         {
@@ -39,7 +41,15 @@ namespace Entity.Behaviour
         }
 
         public void StartAttack() => Animator.SetAnimationState(AnimationType.Attack, true, Attack, AttackEnded);
-
+        
+        protected override void UpdateAnimations()
+        {
+            base.UpdateAnimations();
+            
+            if (!IsGrounded()) 
+                StartFalling();
+        }
+        
         private void Attack()
         {
             var targetCollider = Physics2D.OverlapCircle(_attackPoint.position, _attackRadius, Targets);
@@ -50,5 +60,19 @@ namespace Entity.Behaviour
         }
 
         private void AttackEnded() => AttackSequenceEnded?.Invoke();
+        
+        private bool IsGrounded()
+        {
+            Bounds feetBounds = _feet.bounds;
+            int fallLayer = LayerMask.GetMask("FallingArea");
+            return Physics2D.Raycast(
+                feetBounds.center, 
+                Vector2.down, 
+                feetBounds.extents.y, 
+                fallLayer
+            ).collider == null;
+        }
+
+        private void StartFalling() => Fell?.Invoke();
     }
 }

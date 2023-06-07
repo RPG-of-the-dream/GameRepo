@@ -444,6 +444,7 @@ MonoBehaviour:
   _collider: {fileID: 6406793400334316130}
   _attackPoint: {fileID: 470003739259751409}
   _attackRadius: 0.3
+  _feet: {fileID: 6406793400250753653}
   <SearchBox>k__BackingField: {x: 7, y: 7}
   <Targets>k__BackingField:
     serializedVersion: 2

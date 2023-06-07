@@ -32,6 +32,11 @@ namespace Entity.Behaviour
 
         public void Move(Vector2 direction) => Mover.Move(direction);
 
+        public void PlayDeath() => Animator.SetAnimationState(AnimationType.Death, true, endAnimationAction: () =>
+        {
+            Destroy(gameObject);
+        });
+
         protected virtual void UpdateAnimations()
         {
             Animator.SetAnimationState(AnimationType.Idle, true);
