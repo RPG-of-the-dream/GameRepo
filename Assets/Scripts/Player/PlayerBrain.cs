@@ -66,8 +66,8 @@ namespace Player
             _playerEntity.PlayerStatsUIView.HpBar.value = currentHp;
         }
 
-
-        private void OnAttackRequested() => _currentWeapon?.Attack(StatsController.GetStatValue(StatType.Damage));
+        private void OnAttackRequested() => _currentWeapon?.Attack(StatsController.GetStatValue(StatType.Damage),
+                _playerEntity.CurrentDirection);
 
         private void OnAttackEnded()
         {

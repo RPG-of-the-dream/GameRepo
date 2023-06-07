@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2058427689141701667}
   - component: {fileID: 5030476564762436264}
   - component: {fileID: 7033123506104982292}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4305358501551380807}
   - component: {fileID: 5434375906712748075}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5775600760104215238}
   - component: {fileID: 3236137596945450632}
   - component: {fileID: 5658026757987428511}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6406793400250753652}
   - component: {fileID: 6406793400250753653}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 6406793400334316129}
   - component: {fileID: 2943508908160962455}
   - component: {fileID: 7877812571209683914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Warhog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 6406793400951257782}
   - component: {fileID: 7591630203542247021}
   - component: {fileID: 6406793400951257781}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HogAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,7 +591,7 @@ GameObject:
   - component: {fileID: 8289234075893890144}
   - component: {fileID: 7884063224381605328}
   - component: {fileID: 1909303420928233099}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -667,7 +667,7 @@ GameObject:
   - component: {fileID: 1440513323613646384}
   - component: {fileID: 4000796842325574706}
   - component: {fileID: 1407488132918791760}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 470003739259751409}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,7 +773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6571161564689359064}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
