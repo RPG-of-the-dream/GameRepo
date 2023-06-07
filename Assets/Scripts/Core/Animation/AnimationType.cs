@@ -5,6 +5,6 @@ namespace Core.Animation
         Idle = 0,
         Walk = 1,
         Attack = 2,
-        Fall = 3,
+        Death = 3,
     }
 }

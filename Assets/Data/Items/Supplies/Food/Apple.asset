@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   _itemDescriptor:
-    <ItemId>k__BackingField: 8
-    <Type>k__BackingField: 8
+    <ItemId>k__BackingField: 161
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: 3a3a179866563694cb16a1bd899eeab9, type: 3}
     <ItemRarity>k__BackingField: 1
     <Price>k__BackingField: 0

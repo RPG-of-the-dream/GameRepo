@@ -13,6 +13,8 @@ namespace Core.Animation
         private Action _animationEndAction;
 
         public abstract void Initialize();
+        
+        public abstract void SetAnimationParameter(string parameter, int value);
 
         public bool SetAnimationState(AnimationType animationType, bool active, 
             Action animationAction = null, Action endAnimationAction = null)
@@ -22,8 +24,6 @@ namespace Core.Animation
                 if(_currentAnimationType == AnimationType.Idle || _currentAnimationType != animationType)
                     return false;
 
-                _animationAction = null;
-                _animationEndAction = null;
                 OnAnimationEnded();
                 return false;
             }
@@ -55,9 +55,12 @@ namespace Core.Animation
         protected abstract void PlayAnimation(AnimationType animationType);
         protected abstract void SetDirection(Direction direction);
         protected void OnActionRequested() => _animationAction?.Invoke();
-        protected void OnAnimationEnded()
+
+        private void OnAnimationEnded()
         {
             _animationEndAction?.Invoke();
+            _animationAction = null;
+            _animationEndAction = null;
             SetAnimation(AnimationType.Idle);
         }
     }

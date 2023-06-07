@@ -1,20 +1,34 @@
+using System;
 using Core.Enums;
 using Core.Animation;
 using Core.Movement.Controller;
 using UnityEngine;
-using NPC.Behaviour;
+using Entity.Behaviour;
+using Assets.Scripts.Items.CharacterEquipment;
+using Battle;
 
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerEntityBehaviour : BaseEntityBehaviour
-    {        
+    {
         [SerializeField] private Direction _initialDirection;
         [SerializeField] private CapsuleCollider2D _feet;
 
+        [field: SerializeField] public PlayerStatsUIView PlayerStatsUIView { get; private set; }
+        [field: SerializeField] public CharacterEquipment CharacterEquipment { get; private set; }
+        [field: SerializeField] public SpriteRenderer Arrow { get; private set; }
+        [field: SerializeField] public Attacker Attacker { get; private set; }
+
         private Vector2 _startPosition;
         private bool _fellDown;
-        private bool _inAction;             
+
+        public Direction CurrentDirection => Mover.Direction;
+
+        public event Action AttackRequested; 
+        public event Action AttackEnded;
+        public event Action Respawned; 
+        public event Action Fell;
 
         public override void Initialize()
         {
@@ -24,20 +38,19 @@ namespace Player
             Mover = new DirectionalMover(Rigidbody, _initialDirection);
         }
 
-        private void Update()
-        {
-            if (_fellDown)            
-                Respawn();           
-            else           
-                UpdateAnimations();           
-        }
+        private void Update() => UpdateAnimations();
 
-        public void StartAttack()
-        {
-            if (_inAction)
-                return;
+        public void SetAnimationParameter(string parameter, int value) =>
+            Animator.SetAnimationParameter(parameter, value);
 
-            _inAction = Animator.SetAnimationState(AnimationType.Attack, true, Attack, EndAction);
+        public void StartAttack() => 
+            Animator.SetAnimationState(AnimationType.Attack, true, OnAttack, OnAttackEnded);
+
+        public void Respawn()
+        {
+            transform.position = _startPosition;
+            Animator.ChangeDirection(_initialDirection);
+            Respawned?.Invoke();
         }
 
         protected override void UpdateAnimations()
@@ -49,9 +62,8 @@ namespace Player
                 StartFalling();
         }
 
-        private void Attack() => Debug.Log("Attack");
-
-        private void EndAction() =>  _inAction = false;
+        private void OnAttack() => AttackRequested?.Invoke();
+        private void OnAttackEnded() => AttackEnded?.Invoke();
 
         private bool IsGrounded()
         {
@@ -65,21 +77,6 @@ namespace Player
                                     ).collider == null;
         }
         
-        private void StartFalling() => 
-            _inAction = Animator.SetAnimationState(AnimationType.Fall, true, Falling, EndFalling);
-
-        private void Falling() => Debug.Log("Falling");
-
-        private void EndFalling()
-        {
-            EndAction();
-            _fellDown = true;
-        }
-
-        private void Respawn()
-        {
-            transform.position = _startPosition;
-            _fellDown = false;
-        }
+        private void StartFalling() => Fell?.Invoke();
     }
 }

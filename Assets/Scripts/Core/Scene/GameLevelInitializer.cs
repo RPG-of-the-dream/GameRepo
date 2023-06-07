@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Items;
+using Battle.Projectile;
 using Core.Enums;
 using Core.Services.Updater;
 using Drawing;
+using Entity.Controller;
 using InputReader;
 using Items.Rarity;
 using Items.Storage;
-using NPC.Enums;
-using NPC.Spawn;
+using Entity.Enums;
+using Entity.Spawn;
 using Player;
 using UI;
 using UnityEngine;
@@ -34,6 +36,7 @@ namespace Core.Scene
         private UIContext _uiContext;
         private LevelDrawer _levelDrawer;
         private EntitySpawner _entitySpawner;
+        private ProjectileFactory _projectileFactory;
 
         private IList<IDisposable> _disposables;
         
@@ -46,14 +49,29 @@ namespace Core.Scene
                 _projectUpdater = new GameObject().AddComponent<ProjectUpdater>();
             else
                 _projectUpdater = ProjectUpdater.Instance as ProjectUpdater;
-            
+
+            _levelDrawer = new LevelDrawer(LevelId.Level1);
+            _disposables.Add(_levelDrawer);
+            _projectileFactory = new ProjectileFactory(_levelDrawer);
+
             _externalDevicesInput = new ExternalDevicesInputReader();
-            _playerSystem = new PlayerSystem(_playerEntity, new List<IEntityInputSource>()
-            {
-                _gameUIInputView,
-                _externalDevicesInput
-            });
+
+            var weaponsFactory = new WeaponsFactory(
+                _playerEntity.Arrow,
+                _playerEntity.transform,
+                _playerEntity.Attacker, 
+                _projectileFactory);
+
+            _playerSystem = new PlayerSystem(
+                _playerEntity, 
+                new List<IEntityInputSource>()
+                {
+                    _gameUIInputView,
+                    _externalDevicesInput
+                },
+                weaponsFactory);
             _disposables.Add(_playerSystem);
+            _levelDrawer.RegisterElement(_playerSystem.PlayerBrain);
 
             var data = new UIContext.Data(_playerSystem.Inventory, _rarityDescriptorsStorage.RarityDescriptors);
             _uiContext = new UIContext(new List<IWindowsInputSource>()
@@ -82,10 +100,6 @@ namespace Core.Scene
                 if (isDropped)
                     droppedItems++;
             } while (droppedItems < itemsQuantity);
-
-            _levelDrawer = new LevelDrawer(LevelId.Level1);
-            _levelDrawer.RegisterElement(_playerSystem.PlayerBrain);
-            _disposables.Add(_levelDrawer);
 
             _entitySpawner = new EntitySpawner(_levelDrawer);
             _disposables.Add(_entitySpawner);

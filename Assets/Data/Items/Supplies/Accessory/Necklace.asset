@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Necklace
   m_EditorClassIdentifier: 
   _accessoryDescriptor:
-    <ItemId>k__BackingField: 9
-    <Type>k__BackingField: 7
+    <ItemId>k__BackingField: 181
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: 089dd929d28410a4cb8eff61cca29044, type: 3}
     <ItemRarity>k__BackingField: 4
     <Price>k__BackingField: 0
