@@ -27,12 +27,15 @@ namespace Entity.Controller
 
             _currentHp = StatsController.GetStatValue(StatType.Health);
             _entityBehaviour.DamageTaken += OnDamageTaken;
+            _entityBehaviour.HealingTaken += OnHealingTaken;
         }
 
         public void SetDrawingOrder(int order) => _entityBehaviour.SetDrawingOrder(order);
         
         public virtual void Dispose()
         {
+            _entityBehaviour.DamageTaken -= OnDamageTaken;
+            _entityBehaviour.HealingTaken -= OnHealingTaken;
             _entityBehaviour.PlayDeath();
             StatsController.Dispose();
         }
@@ -54,6 +57,17 @@ namespace Entity.Controller
             {
                 Died?.Invoke(this);
             }
+        }
+
+        private void OnHealingTaken(float healing)
+        {
+            if (healing < 0)
+            {
+                return;
+            }
+            
+            _currentHp = Mathf.Clamp(_currentHp + healing, _currentHp, StatsController.GetStatValue(StatType.Health));
+            VisualizeHp(_currentHp);
         }
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 namespace Entity.Behaviour
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class BaseEntityBehaviour : MonoBehaviour, IDamageable
+    public class BaseEntityBehaviour : MonoBehaviour, IDamageable, IHealable
     {
         [SerializeField] protected AnimatorController Animator;
         [SerializeField] private SortingGroup _sortingGroup;
@@ -19,6 +19,7 @@ namespace Entity.Behaviour
         public float VerticalPosition => Rigidbody.position.y;
         
         public event Action<float> DamageTaken;
+        public event Action<float> HealingTaken; 
 
         public virtual void Initialize()
         {
@@ -27,6 +28,7 @@ namespace Entity.Behaviour
         }
 
         public void TakeDamage(float damage) => DamageTaken?.Invoke(damage);
+        public void TakeHealing(float healing) => HealingTaken?.Invoke(healing);
 
         public void SetDrawingOrder(int order) => _sortingGroup.sortingOrder = order;
 

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Assets.Scripts.Items;
+using Entity.Controller;
 using InputReader;
 using StatsSystem;
 using UnityEngine;
@@ -34,13 +35,20 @@ namespace Player
 
             Inventory = new Inventory(null, null, _playerEntity.transform, new EquipmentConditionChecker());
             PlayerBrain = new PlayerBrain(playerEntity, inputSources, StatsController, Inventory, weaponsFactory);
+            PlayerBrain.Died += OnPlayerDeath;
             _disposables.Add(PlayerBrain);
         }
 
         public void Dispose()
         {
+            PlayerBrain.Died -= OnPlayerDeath;
             foreach (var disposable in _disposables)
                 disposable.Dispose();
+        }
+
+        private void OnPlayerDeath(BaseEntity baseEntity)
+        {
+            _playerEntity.Respawn();
         }
     }
 }
