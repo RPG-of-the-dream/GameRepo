@@ -27,6 +27,8 @@ namespace Player
 
         public event Action AttackRequested; 
         public event Action AttackEnded;
+        public event Action Respawned; 
+        public event Action Fell;
 
         public override void Initialize()
         {
@@ -36,19 +38,20 @@ namespace Player
             Mover = new DirectionalMover(Rigidbody, _initialDirection);
         }
 
-        private void Update()
-        {
-            if (_fellDown)            
-                Respawn();           
-            else           
-                UpdateAnimations();           
-        }
+        private void Update() => UpdateAnimations();
 
         public void SetAnimationParameter(string parameter, int value) =>
             Animator.SetAnimationParameter(parameter, value);
 
         public void StartAttack() => 
             Animator.SetAnimationState(AnimationType.Attack, true, OnAttack, OnAttackEnded);
+
+        public void Respawn()
+        {
+            transform.position = _startPosition;
+            Animator.ChangeDirection(_initialDirection);
+            Respawned?.Invoke();
+        }
 
         protected override void UpdateAnimations()
         {
@@ -74,17 +77,6 @@ namespace Player
                                     ).collider == null;
         }
         
-        private void StartFalling() => 
-            Animator.SetAnimationState(AnimationType.Fall, true, Falling, EndFalling);
-
-        private void Falling() => Debug.Log("Falling");
-
-        private void EndFalling() => _fellDown = true;
-
-        private void Respawn()
-        {
-            transform.position = _startPosition;
-            _fellDown = false;
-        }
+        private void StartFalling() => Fell?.Invoke();
     }
 }

@@ -6,6 +6,7 @@ using Battle.Projectile;
 using Core.Enums;
 using Core.Services.Updater;
 using Drawing;
+using Entity.Controller;
 using InputReader;
 using Items.Rarity;
 using Items.Storage;
@@ -50,6 +51,7 @@ namespace Core.Scene
                 _projectUpdater = ProjectUpdater.Instance as ProjectUpdater;
 
             _levelDrawer = new LevelDrawer(LevelId.Level1);
+            _disposables.Add(_levelDrawer);
             _projectileFactory = new ProjectileFactory(_levelDrawer);
 
             _externalDevicesInput = new ExternalDevicesInputReader();
@@ -69,6 +71,7 @@ namespace Core.Scene
                 },
                 weaponsFactory);
             _disposables.Add(_playerSystem);
+            _levelDrawer.RegisterElement(_playerSystem.PlayerBrain);
 
             var data = new UIContext.Data(_playerSystem.Inventory, _rarityDescriptorsStorage.RarityDescriptors);
             _uiContext = new UIContext(new List<IWindowsInputSource>()
@@ -97,10 +100,6 @@ namespace Core.Scene
                 if (isDropped)
                     droppedItems++;
             } while (droppedItems < itemsQuantity);
-
-            _levelDrawer = new LevelDrawer(LevelId.Level1);
-            _levelDrawer.RegisterElement(_playerSystem.PlayerBrain);
-            _disposables.Add(_levelDrawer);
 
             _entitySpawner = new EntitySpawner(_levelDrawer);
             _disposables.Add(_entitySpawner);

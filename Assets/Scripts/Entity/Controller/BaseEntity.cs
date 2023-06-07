@@ -14,9 +14,9 @@ namespace Entity.Controller
 
         private float _currentHp;
         
-        public event Action<BaseEntity> Died;
-
         public float VerticalPosition => _entityBehaviour.VerticalPosition;
+        
+        public event Action<BaseEntity> Died;
         public event Action<ILevelGraphicElement> VerticalPositionChanged;
 
         protected BaseEntity(BaseEntityBehaviour entityBehaviour, StatsController statsController)
@@ -27,12 +27,19 @@ namespace Entity.Controller
 
             _currentHp = StatsController.GetStatValue(StatType.Health);
             _entityBehaviour.DamageTaken += OnDamageTaken;
+            _entityBehaviour.HealingTaken += OnHealingTaken;
         }
 
         public void SetDrawingOrder(int order) => _entityBehaviour.SetDrawingOrder(order);
         
-        public virtual void Dispose() => StatsController.Dispose();
-        
+        public virtual void Dispose()
+        {
+            _entityBehaviour.DamageTaken -= OnDamageTaken;
+            _entityBehaviour.HealingTaken -= OnHealingTaken;
+            _entityBehaviour.PlayDeath();
+            StatsController.Dispose();
+        }
+
         protected abstract void VisualizeHp(float currentHp);
         protected void OnVerticalPositionChanged() => VerticalPositionChanged?.Invoke(this);
 
@@ -50,6 +57,17 @@ namespace Entity.Controller
             {
                 Died?.Invoke(this);
             }
+        }
+
+        private void OnHealingTaken(float healing)
+        {
+            if (healing < 0)
+            {
+                return;
+            }
+            
+            _currentHp = Mathf.Clamp(_currentHp + healing, _currentHp, StatsController.GetStatValue(StatType.Health));
+            VisualizeHp(_currentHp);
         }
     }
 }

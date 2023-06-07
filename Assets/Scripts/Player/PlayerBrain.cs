@@ -36,6 +36,8 @@ namespace Player
             : base(entityBehaviour, statsController)
         {
             _playerEntity = entityBehaviour;
+            _playerEntity.Fell += OnFell;
+            _playerEntity.Respawned += OnRespawned;
             _playerEntity.AttackEnded += OnAttackEnded;
             _playerEntity.AttackRequested += OnAttackRequested;
             
@@ -52,6 +54,11 @@ namespace Player
 
         public override void Dispose()
         {
+            _playerEntity.Fell -= OnFell;
+            _playerEntity.Respawned -= OnRespawned;
+            _playerEntity.AttackEnded -= OnAttackEnded;
+            _playerEntity.AttackRequested -= OnAttackRequested;
+            _inventory.EquipmentChanged -= OnEquipmentChanged;
             ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
             base.Dispose();
         }
@@ -139,5 +146,13 @@ namespace Player
             return Vector2.zero;
         }
         private bool IsAttack => _inputSources.Any(source => source.Attack);
+        
+        private void OnFell() =>
+            _playerEntity.TakeDamage(
+                StatsController.GetStatValue(StatType.Health) +
+                StatsController.GetStatValue(StatType.Defence)
+            );
+
+        private void OnRespawned() => _playerEntity.TakeHealing(StatsController.GetStatValue(StatType.Health));
     }
 }

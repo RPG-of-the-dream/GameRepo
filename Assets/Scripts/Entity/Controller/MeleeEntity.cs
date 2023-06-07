@@ -16,7 +16,6 @@ namespace Entity.Controller
         private readonly float _moveDelta;
 
         private bool _isAttacking;
-
         private Coroutine _searchCoroutine;
         private Collider2D _target;
         private Vector3 _previousTargetPosition;
@@ -32,6 +31,7 @@ namespace Entity.Controller
             _meleeEntityBehaviour = entityBehaviour;
             _meleeEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
             _meleeEntityBehaviour.Attacked += OnAttacked;
+            _meleeEntityBehaviour.Fell += OnFell;
             VisualizeHp(StatsController.GetStatValue(StatType.Health));
             
             _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchCoroutine());
@@ -41,7 +41,11 @@ namespace Entity.Controller
 
         public override void Dispose()
         {
+            _meleeEntityBehaviour.Fell -= OnFell;
+            _meleeEntityBehaviour.Attacked -= OnAttacked;
+            _meleeEntityBehaviour.AttackSequenceEnded -= OnAttackEnded;
             ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdateCalled;
+            ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
             base.Dispose();
         }
 
@@ -154,6 +158,12 @@ namespace Entity.Controller
 
         private bool TryGetTarget(out Collider2D target)
         {
+            target = null;
+            if (_meleeEntityBehaviour is null && _meleeEntityBehaviour.transform is null)
+            {
+                return false;
+            }
+            
             target = Physics2D.OverlapBox(
                 _meleeEntityBehaviour.transform.position,
                 _meleeEntityBehaviour.SearchBox,
@@ -173,5 +183,11 @@ namespace Entity.Controller
                 _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchCoroutine());
             }, StatsController.GetStatValue(StatType.AfterAttackDelay));
         }
+
+        private void OnFell() =>
+            _meleeEntityBehaviour.TakeDamage(
+                StatsController.GetStatValue(StatType.Health) +
+                StatsController.GetStatValue(StatType.Defence)
+            );
     }
 }
